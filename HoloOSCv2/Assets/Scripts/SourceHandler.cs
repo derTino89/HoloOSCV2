@@ -33,8 +33,9 @@ public class SourceHandler : MonoBehaviour
             src.name = "Source" + sources.Count;
             src.transform.parent = this.transform;
             src.GetComponent<SolverHandler>().TransformOverride = src.transform.parent;
-            src.GetComponent<SourceObject>().SetID(sources.Count);
+            src.GetComponent<SourceObject>().SetID(sources.Count+1);
             sources.Add(src);
+            
         }
     }
 
@@ -42,4 +43,5 @@ public class SourceHandler : MonoBehaviour
         //Destroy() the targeted Source 
     }
 
+   
 }

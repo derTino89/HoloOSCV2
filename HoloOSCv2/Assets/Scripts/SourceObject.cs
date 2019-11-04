@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class SourceObject : MonoBehaviour
 {
+    private GameObject label;
+
     int id = 0;
     const string azimuth = "/MultiEncoder/azimuth";
     const string elevation = "/MultiEncoder/elevation";
@@ -16,6 +20,12 @@ public class SourceObject : MonoBehaviour
         trans = GetComponent<Transform>().transform;
         handler = GameObject.FindGameObjectWithTag("OSCHandler");
         output = handler.GetComponent<OSCOutput>();
+
+        label = new GameObject("labelID");
+        label.transform.SetParent(this.transform);
+        label.AddComponent<TextMesh>().text = id.ToString();
+        label.transform.localPosition = new Vector3(-0.2f, 1.2f, 0);
+        label.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
     public float  GetElevation() {
         float radius = GetComponent<SphereCollider>().radius;
