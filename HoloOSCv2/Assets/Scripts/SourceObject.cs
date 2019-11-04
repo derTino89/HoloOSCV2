@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class SourceObject : MonoBehaviour
 {
@@ -20,12 +18,7 @@ public class SourceObject : MonoBehaviour
         trans = GetComponent<Transform>().transform;
         handler = GameObject.FindGameObjectWithTag("OSCHandler");
         output = handler.GetComponent<OSCOutput>();
-
-        label = new GameObject("labelID");
-        label.transform.SetParent(this.transform);
-        label.AddComponent<TextMesh>().text = id.ToString();
-        label.transform.localPosition = new Vector3(-0.2f, 1.2f, 0);
-        label.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        AddLabel();
     }
     public float  GetElevation() {
         float radius = GetComponent<SphereCollider>().radius;
@@ -52,5 +45,13 @@ public class SourceObject : MonoBehaviour
     }
     public void SetID(int id) {
         this.id = id;
+    }
+
+    public void AddLabel() {
+        label = new GameObject("labelID");
+        label.transform.SetParent(this.transform);
+        label.AddComponent<TextMesh>().text = id.ToString();
+        label.transform.localPosition = new Vector3(-0.2f, 1.2f, 0);
+        label.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 }
