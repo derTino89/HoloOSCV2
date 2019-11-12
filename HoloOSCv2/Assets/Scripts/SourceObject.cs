@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using TMPro;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class SourceObject : MonoBehaviour
 {
-    private GameObject label;
-    private GameObject toolTip;
     int id = 0;
     const string azimuth = "/MultiEncoder/azimuth";
     const string elevation = "/MultiEncoder/elevation";
+    ToolTip toolTip;
 
     Transform trans;
     GameObject handler;
@@ -21,7 +21,6 @@ public class SourceObject : MonoBehaviour
         output = handler.GetComponent<OSCOutput>();
 
         AddToolTip();
-        AddLabel();
 }
     public float  GetElevation() {
         float radius = GetComponent<SphereCollider>().radius;
@@ -49,23 +48,11 @@ public class SourceObject : MonoBehaviour
     public void SetID(int id) {
         this.id = id;
     }
-
-    public void AddLabel() {
-        label = new GameObject("ChannelNr");
-        label.transform.SetParent(this.transform);
-        int channel = id + 1;
-        label.AddComponent<TextMesh>().text = channel.ToString();
-        label.transform.localPosition = new Vector3(-0.2f, 1.2f, 0);
-        label.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-    }
+    
     public void AddToolTip() {
         int channel = id + 1;
-        toolTip = this.transform.GetChild(0).gameObject;
+        toolTip = this.transform.GetChild(0).gameObject.GetComponent<ToolTip>();
+        toolTip.ToolTipText = channel.ToString();
         toolTip.transform.localScale = new Vector3(6.0f, 6.0f, 0.1f);
-        GameObject ToolTipLabel = toolTip.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
-        //Destroy(ToolTipLabel.GetComponent<TextMeshPro>());
-        TextMeshPro labelText = ToolTipLabel.GetComponent<TextMeshPro>();
-        labelText.text = "uhgzg";
-        labelText.ForceMeshUpdate(true);
     }
 }
