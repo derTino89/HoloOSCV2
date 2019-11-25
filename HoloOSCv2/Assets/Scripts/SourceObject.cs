@@ -35,8 +35,7 @@ public class SourceObject : MonoBehaviour
         scaleScript = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
         minScale = scaleScript.minimumScale;
         maxScale = scaleScript.maximumScale;
-        //Debug.Log("minScale:" + minScale.ToString("F4"));
-        //Debug.Log("maxScale:" + maxScale.ToString("F4"));
+
         setDefaultMat();
         AddToolTip();
 }
@@ -55,10 +54,10 @@ public class SourceObject : MonoBehaviour
     }
     public float GetGain()
     {
-        Vector3 currentScale = transform.localScale; //scale of a sphere: xValue = yValue = zValue
-        float currentScaleValue = currentScale.x / maxScale.x; // scaleValue now normed between 0 and 1
+        Vector3 currentScale = transform.localScale; 
+        float currentScaleValue = (currentScale.x-minScale.x)/ (maxScale.x-minScale.x); // scaleValue now normed between 0 and 1
         float currentScaleOSC = -60 + currentScaleValue * 70; // scaleValue stretched for encoder to values from -60 to +10
-        if (currentScaleX > minScale.x)
+        if (currentScale.x > minScale.x)
         {
             return currentScaleOSC;
         }
