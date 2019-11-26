@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876711951391941708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8691013048217209521}
@@ -289,8 +289,8 @@ MonoBehaviour:
   targetTransform: {fileID: 1327461097190608881}
   scaleMinimum: 0.5
   minimumScale: {x: 0.05, y: 0.05, z: 0.05}
-  scaleMaximum: 4
-  maximumScale: {x: 0.4, y: 0.4, z: 0.4}
+  scaleMaximum: 3
+  maximumScale: {x: 0.3, y: 0.3, z: 0.3}
   relativeToInitialState: 1
 --- !u!1 &3974435328859267028
 GameObject:
@@ -951,7 +951,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7272291723360917649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5138759748277328200}
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e108b635a73db40a8d3c02d87c249f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1327461097190608843}
   toolTip: {fileID: 1987331793121945065}
   connectorFollowType: 1
   pivotMode: 0
@@ -1092,10 +1092,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   uniformDistortionStrength: 1
   startPoint:
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 0.5, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   endPoint:
-    position: {x: 0, y: 0.23300466, z: 0}
+    position: {x: 0, y: 0.26699537, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &2533624522062675646
 MonoBehaviour:
@@ -1240,7 +1240,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0.023300467, z: 0}
+  - {x: 0, y: -0.023300463, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
