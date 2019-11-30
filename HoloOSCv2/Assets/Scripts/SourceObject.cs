@@ -17,8 +17,9 @@ public class SourceObject : MonoBehaviour
     Material matDefault;
     Material matMin;
     
-    Vector3 minScale;
-    Vector3 maxScale;
+    float scaleMinimum = 0.5f;
+    float scaleMaximum = 3.0f;
+    float initialScale;
 
     TransformScaleHandler scaleScript;
 
@@ -32,10 +33,7 @@ public class SourceObject : MonoBehaviour
         matDefault = Resources.Load("yellow") as Material;
         matMin = Resources.Load("blue") as Material;
 
-        scaleScript = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
-        minScale = scaleScript.minimumScale;
-        maxScale = scaleScript.maximumScale;
-
+        initiateScales();
         setDefaultMat();
         AddToolTip();
 }
@@ -54,14 +52,25 @@ public class SourceObject : MonoBehaviour
     }
     public float GetGain()
     {
-        Vector3 currentScale = transform.localScale; 
-        float currentScaleValue = (currentScale.x-minScale.x)/ (maxScale.x-minScale.x); // scaleValue now normed between 0 and 1
+        float currentScale = transform.localScale.x;
+        float currentScaleValue = (currentScale - minScale()) / (maxScale() - minScale()); // scaleValue now normed between 0 and 1
         float currentScaleOSC = -60 + currentScaleValue * 70; // scaleValue stretched for encoder to values from -60 to +10
-        if (currentScale.x > minScale.x)
-        {
-            return currentScaleOSC;
-        }
-        else return -60;
+        return currentScaleOSC;
+    }
+
+    private void initiateScales() {
+        scaleScript = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
+        scaleScript.ScaleMinimum = scaleMinimum;
+        scaleScript.ScaleMaximum = scaleMaximum;
+        initialScale = transform.localScale.x;
+    }
+    private float minScale()
+    {
+        return scaleMinimum * initialScale;
+    }
+    private float maxScale()
+    {
+        return scaleMaximum * initialScale;
     }
 
     public void sendMessageToOSCHandler() {
@@ -77,7 +86,6 @@ public class SourceObject : MonoBehaviour
 
         data[0] = gain + GetID().ToString();
         data[1] = GetGain().ToString();
-        Debug.Log("OSC-Gain:" + GetGain().ToString("F3"));
         output.SendMessage("SendOSCMessageToClient", data);
     }
     public int GetID() {
@@ -94,6 +102,18 @@ public class SourceObject : MonoBehaviour
         toolTip.transform.localScale = new Vector3(6.0f, 6.0f, 0.1f);
     }
 
+    public void checkMat() {
+        float gain = GetGain();
+        if (gain < -59.5)
+        {
+            setMinMat();
+            Debug.Log("Channel " + id+1 + " MUTED");
+        }
+        else {
+            setDefaultMat();
+            Debug.Log("Channel " + id + 1 + " UNMUTED");
+        }
+    }
     public void setDefaultMat() {
         GetComponent<MeshRenderer>().material = matDefault;
     }
