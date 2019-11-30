@@ -213,6 +213,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1327461097190608845}
+        m_MethodName: checkMat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: Microsoft.MixedReality.Toolkit.UI.ManipulationEvent, Microsoft.MixedReality.Toolkit.SDK,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   OnHoverEntered:
@@ -287,10 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 1327461097190608881}
-  scaleMinimum: 0.5
-  minimumScale: {x: 0.05, y: 0.05, z: 0.05}
-  scaleMaximum: 3
-  maximumScale: {x: 0.3, y: 0.3, z: 0.3}
+  scaleMinimum: 0
+  scaleMaximum: 0
   relativeToInitialState: 1
 --- !u!1 &3974435328859267028
 GameObject:

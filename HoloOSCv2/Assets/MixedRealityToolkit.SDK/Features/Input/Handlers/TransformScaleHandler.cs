@@ -29,8 +29,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
         [Tooltip("Minimum scaling allowed")]
         private  float scaleMinimum = 0.2f;
 
-        //private Vector3 minimumScale;       CHANGED FROM PRIVATE
-        public Vector3 minimumScale;
+        private Vector3 minimumScale;
         
         public float ScaleMinimum
         {
@@ -46,7 +45,7 @@ namespace Microsoft.MixedReality.Toolkit.UI
         [Tooltip("Maximum scaling allowed")]
         private float scaleMaximum = 2f;
 
-        public Vector3 maximumScale; //        CHANGED FROM PRIVATE
+        private Vector3 maximumScale; 
 
         public float ScaleMaximum
         {
