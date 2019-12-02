@@ -6,40 +6,74 @@ using UnityEngine;
 
 public class ConnectionStatusCheck : MonoBehaviour
 {
-    private OscOut _oscOut;
+    private OSCOutput _oscOut;
+    private OSCInput _oscIn;
     private Renderer _meshRenderer;
     private Material[] _materials;
     private Color _mat0Color, _mat1Color;
+    private Boolean _isConnected;
+    protected int _count;
 
     // Start is called before the first frame update
     void Start()
     {
-        _oscOut = GameObject.FindWithTag("OSCHandler").GetComponent<OscOut>();
+        _oscOut = GameObject.FindWithTag("OSCHandler").GetComponent<OSCOutput>();
+        _oscIn = GameObject.FindWithTag("OSCHandler").GetComponent<OSCInput>();
+
 
         _meshRenderer = GetComponent<MeshRenderer>();
         _meshRenderer.enabled = true;
 
         _materials = _meshRenderer.materials;
-        _mat0Color = _materials[0].color;
-        _mat1Color = _materials[1].color;
+        _mat0Color = _materials[0].color; //Not Connected
+        _mat1Color = _materials[1].color; //Connected
         _materials[1].SetColor("_Color", Color.clear);
 
-        _meshRenderer.material = _materials[0]; 
+        _meshRenderer.material = _materials[0];
+
+        _count = 0;
     }
-    // Update is called once per frame
+
     void Update()
     {
-        if (_oscOut.remoteStatus == OscRemoteStatus.Connected && _meshRenderer.sharedMaterial != _materials[1])
+        //Sends "/Multiencoder/mute63 1" oncec every second
+
+        if(_count==600)
         {
-            _materials[0].SetColor("_Color", Color.clear);
-            _materials[1].SetColor("_Color", _mat1Color);
+            setConnectionStatus(true);
+            sendMute64(1);
+            _count = 0;
+        }
+        _changeMaterialDependingOnStatus();
+        _count++;
+
+    }
+
+    public void sendMute64(int mute)
+    {
+        if (mute > 1)
+        {
+            mute = 1;
+        }
+
+        string[] data = new string[2];
+
+        data[0] = "/MultiEncoder/mute63";
+        data[1] = mute.ToString();
+        _oscOut.SendMessage("SendOSCMessageToClient", data);
+    }
+    
+
+    public void setConnectionStatus(Boolean status)
+    {
+        _isConnected = status;
+    }
+
+    private void _changeMaterialDependingOnStatus()
+    {
+        if(_isConnected && _meshRenderer.material != _materials[1])
             _meshRenderer.material = _materials[1];
-        }
-        if (_oscOut.remoteStatus == OscRemoteStatus.Disconnected && _meshRenderer.sharedMaterial != _materials[0])
-        {
-            _materials[1].SetColor("_Color", Color.clear);
-            _materials[0].SetColor("_Color", _mat0Color);
+        if(!_isConnected)
             _meshRenderer.material = _materials[0];
-        }
     }
 }
