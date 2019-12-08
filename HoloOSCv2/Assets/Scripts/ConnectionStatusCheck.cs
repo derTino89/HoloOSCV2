@@ -13,6 +13,7 @@ public class ConnectionStatusCheck : MonoBehaviour
     private Color _mat0Color, _mat1Color;
     private Boolean _isConnected;
     protected int _count;
+    protected int _connectionFailCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +30,8 @@ public class ConnectionStatusCheck : MonoBehaviour
         _mat1Color = _materials[1].color; //Connected
         _materials[1].SetColor("_Color", Color.clear);
 
-        _meshRenderer.material = _materials[0];
-
         _count = 0;
+        _connectionFailCounter = 0;
     }
 
     void Update()
@@ -40,7 +40,7 @@ public class ConnectionStatusCheck : MonoBehaviour
 
         if(_count==600)
         {
-            setConnectionStatus(true);
+            setConnectionStatus(false);
             sendMute64(1);
             _count = 0;
         }
@@ -66,14 +66,25 @@ public class ConnectionStatusCheck : MonoBehaviour
 
     public void setConnectionStatus(Boolean status)
     {
+        if (status)
+            _connectionFailCounter = 0;
+        if (!status)
+            _connectionFailCounter++;
+
         _isConnected = status;
     }
 
     private void _changeMaterialDependingOnStatus()
     {
-        if(_isConnected && _meshRenderer.material != _materials[1])
-            _meshRenderer.material = _materials[1];
-        if(!_isConnected)
-            _meshRenderer.material = _materials[0];
+        if (_isConnected)
+        {
+            _materials[0].SetColor("_Color", Color.clear);
+            _materials[1].SetColor("_Color", _mat1Color);
+        }
+        if (!_isConnected && _connectionFailCounter>1)
+        {
+            _materials[1].SetColor("_Color", Color.clear);
+            _materials[0].SetColor("_Color", _mat0Color);
+        }
     }
 }
