@@ -45,8 +45,8 @@ namespace Microsoft.MixedReality.Toolkit.UI
         [Tooltip("Maximum scaling allowed")]
         private float scaleMaximum = 2f;
 
-        private Vector3 maximumScale;
-        
+        private Vector3 maximumScale; 
+
         public float ScaleMaximum
         {
             get => maximumScale.x;
