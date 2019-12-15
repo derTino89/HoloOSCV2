@@ -8,17 +8,21 @@ public class SourceObject : MonoBehaviour
     const string azimuth = "/MultiEncoder/azimuth";
     const string elevation = "/MultiEncoder/elevation";
     const string gain = "/MultiEncoder/gain";
+    float radShell;
     ToolTip toolTip;
 
     Transform trans;
     GameObject handler;
+    GameObject Shell;
     OSCOutput output;
+
+    bool obtuseAngle = false;
 
     Material matDefault;
     Material matMin;
     
     float scaleMinimum = 0.5f;
-    float scaleMaximum = 3.0f;
+    float scaleMaximum = 2.5f;
     float initialScale;
 
     TransformScaleHandler scaleScript;
@@ -29,6 +33,8 @@ public class SourceObject : MonoBehaviour
         trans = GetComponent<Transform>().transform;
         handler = GameObject.FindGameObjectWithTag("OSCHandler");
         output = handler.GetComponent<OSCOutput>();
+        Shell = GameObject.FindGameObjectWithTag("SourceShell");
+        radShell = Shell.GetComponent<Transform>().transform.localScale.x * Shell.GetComponent<SphereCollider>().radius;
 
         matDefault = Resources.Load("yellow") as Material;
         matMin = Resources.Load("blue") as Material;
@@ -38,17 +44,73 @@ public class SourceObject : MonoBehaviour
         AddToolTip();
 }
 
-    public float  GetElevation() {
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        float angle = eulerAngles.x;
-        angle = angle > 180 ? angle - 360 : angle;
-        return angle *= -1;
+    public void setAzimuth(float azimuth)
+    {
+        float radA;
+        if (obtuseAngle)
+        {
+            radA = azimuth * Mathf.Deg2Rad +180;
+        }
+        else
+        {
+            radA = azimuth * Mathf.Deg2Rad;
+        }
+        float radE = this.GetElevation() * Mathf.Deg2Rad;
+        float z = radShell * (Mathf.Cos(radE) * Mathf.Cos(radA));
+        float x = radShell * (Mathf.Cos(radE) * Mathf.Sin(radA));
+        float y = radShell * Mathf.Sin(radE);
+        transform.position = new Vector3(x, y, -z);
     }
-    public float GetAzimuth() {
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        float angle = eulerAngles.y;
+    public void setElevation(float elevation, float additionalAngleE, bool obtuse)
+    {
+        float radE = elevation * Mathf.Deg2Rad;
+        float radA = this.GetAzimuth() * Mathf.Deg2Rad;
+        float radAddE = additionalAngleE * Mathf.Deg2Rad;
+        float radAddA = 180 * Mathf.Deg2Rad;
+        if (obtuse != obtuseAngle)
+        {
+            float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA + radAddA));
+            float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA + radAddA));
+            float y = radShell * Mathf.Sin(radE - radAddE);
+            transform.position = new Vector3(x, y, -z);
+            obtuseAngle = obtuse;
+        }
+        else
+        {
+            float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA));
+            float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA));
+            float y = radShell * Mathf.Sin(radE - radAddE);
+            transform.position = new Vector3(x, y, -z);
+        }
+    }
+    public void setGain(float gain)
+    {
+        float newGain = minScale() + ((maxScale() - minScale()) * (gain + 60) / 70);
+        transform.localScale = new Vector3(newGain, newGain, newGain);
+        if (newGain <= minScale())
+        {
+            setMinMat();
+        }
+        else
+        {
+            setDefaultMat();
+        }
+    }
+
+    public float GetElevation()
+    {
+        Vector3 position = transform.position;
+        float angle = Mathf.Rad2Deg * Mathf.Atan(position.y / Mathf.Sqrt(position.z * position.z + position.x * position.x));
+        return angle;
+
+    }
+    public float GetAzimuth()
+    {
+        Vector3 position = transform.position;
+        float angle = Mathf.Rad2Deg * Mathf.Atan(position.x / position.z);
+        angle = position.z > 0 ? angle + 180 : angle;
         angle = angle > 180 ? angle - 360 : angle;
-        return angle *= -1;
+        return angle * -1;
     }
     public float GetGain()
     {
