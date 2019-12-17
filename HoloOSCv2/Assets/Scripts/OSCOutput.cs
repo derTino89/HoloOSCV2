@@ -9,6 +9,8 @@ public class OSCOutput : MonoBehaviour
     [SerializeField]
     private OscOut oscOut;
 
+    private ConnectionStatusCheck csc;
+
     [SerializeField]
     string port;
     [SerializeField]
@@ -20,6 +22,7 @@ public class OSCOutput : MonoBehaviour
         port = "8000";
         ipadress = "127.0.0.1";
         oscOut = gameObject.GetComponent<OscOut>();
+        csc = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>();
     }
 
     // data[0] must always be the adress ; adress is taken from https://plugins.iem.at/docs/osc/#multiencoder
@@ -41,6 +44,7 @@ public class OSCOutput : MonoBehaviour
             SetPort("8000");
         }
         OpenReciever();
+        csc.sendMute64(0);
     }
     public void OpenReciever() {
         oscOut.Open(Int32.Parse(port), ipadress);

@@ -529,7 +529,7 @@ MonoBehaviour:
   _bundleMessagesOnEndOfFrame: 0
   _splitBundlesAvoidingBufferOverflow: 1
   _settingsFoldout: 1
-  _messagesFoldout: 0
+  _messagesFoldout: 1
 --- !u!114 &451885518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OscSimpl.OscMessageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  _port: 80001
+  _port: 8001
   _mode: 0
   _multicastAddress: 
   _filterDuplicates: 1
