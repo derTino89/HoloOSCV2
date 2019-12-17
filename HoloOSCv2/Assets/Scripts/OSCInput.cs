@@ -4,17 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OSCInput : MonoBehaviour
-{
+{    
+    public SourceHandler sh;
+
     [SerializeField]
     private OscIn oscIn;
 
     private ConnectionStatusCheck connectionStatusCheck;
 
+    string address1 = "/MultiEncoder/inputSetting";
     const string mute64 = "/MultiEncoder/mute63";
+
     // Start is called before the first frame update
     void Start()
     {
-        oscIn = GameObject.FindWithTag("OSCHandler").GetComponent<OscIn>();
         connectionStatusCheck = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>();
         bool response = oscIn.Open(8001);
         Debug.Log("Opening OSCin: " + response);
@@ -22,14 +25,18 @@ public class OSCInput : MonoBehaviour
 
     void OnEnable()
     {
-        // You can "map" messages to methods in two ways:
+        for (int i = 0; i < sh.getCount(); i++)
+        {
+            string azimuth = "/MultiEncoder/azimuth" + i.ToString();
+            string elevation = "/MultiEncoder/elevation" + i.ToString();
+            string gain = "/MultiEncoder/gain" + i.ToString();
 
-        // 1) For messages with a single argument, route the value using the type specific map methods.
+            oscIn.Map(azimuth, sh.UpdateThroughReaper);
+            oscIn.Map(elevation, sh.UpdateThroughReaper);
+            oscIn.Map(gain, sh.UpdateThroughReaper);
+        }
 
-        //oscIn.MapFloat(mute64, OnTest);        
         oscIn.MapFloat(mute64, OnConnectionCheck);
-
-        // 2) For messages with multiple arguments, route the message using the Map method.
     }
 
     void OnConnectionCheck(float value)
@@ -40,6 +47,6 @@ public class OSCInput : MonoBehaviour
         {
             connectionStatusCheck.sendMute64(0);
         }
-        connectionStatusCheck.setConnectionStatus(true);
+        connectionStatusCheck.setConnectionStatus(true);   
     }
 }
