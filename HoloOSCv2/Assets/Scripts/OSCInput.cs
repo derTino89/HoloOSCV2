@@ -1,19 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OSCInput : MonoBehaviour
-{
+{    
     public SourceHandler sh;
 
     [SerializeField]
     private OscIn oscIn;
 
+    private ConnectionStatusCheck connectionStatusCheck;
+    
     // Start is called before the first frame update
     void Start()
     {
+        connectionStatusCheck = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>();
         bool response = oscIn.Open(8001);
-        Debug.Log("Opening OSCin: " + response);
     }
 
     void OnEnable()
@@ -30,6 +33,16 @@ public class OSCInput : MonoBehaviour
             oscIn.Map(elevation, sh.UpdateThroughReaper);
             oscIn.Map(gain, sh.UpdateThroughReaper);
         }
+        oscIn.MapFloat("/MultiEncoder/mute63", OnConnectionCheck);
         oscIn.Map("/MultiEncoder/inputSetting", sh.UpdateThroughReaper);
+    }
+
+    void OnConnectionCheck(float value)
+    {
+        if (value == 1)
+        {
+            connectionStatusCheck.sendMute64(0);
+        }
+        connectionStatusCheck.setConnectionStatus(true);   
     }
 }
