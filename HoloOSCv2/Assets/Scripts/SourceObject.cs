@@ -11,6 +11,11 @@ public class SourceObject : MonoBehaviour
     float radShell;
     ToolTip toolTip;
 
+    [SerializeField]
+    private float azimuthAngle;
+   [SerializeField]
+    private float elevationAngle;
+
     Transform trans;
     GameObject handler;
     GameObject Shell;
@@ -43,6 +48,10 @@ public class SourceObject : MonoBehaviour
         setDefaultMat();
         AddToolTip();
 }
+    private void Update() {
+        azimuthAngle = GetAzimuth();
+        elevationAngle = GetElevation();
+    }
 
     public void setAzimuth(float azimuth)
     {
@@ -59,7 +68,7 @@ public class SourceObject : MonoBehaviour
         float z = radShell * (Mathf.Cos(radE) * Mathf.Cos(radA));
         float x = radShell * (Mathf.Cos(radE) * Mathf.Sin(radA));
         float y = radShell * Mathf.Sin(radE);
-        transform.position = new Vector3(x, y, -z);
+        transform.position = new Vector3(-x, y, z);
     }
     public void setElevation(float elevation, float additionalAngleE, bool obtuse)
     {

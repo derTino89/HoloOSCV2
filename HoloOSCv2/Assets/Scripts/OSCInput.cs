@@ -9,8 +9,6 @@ public class OSCInput : MonoBehaviour
     [SerializeField]
     private OscIn oscIn;
 
-    string address1 = "/MultiEncoder/inputSetting";
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +18,9 @@ public class OSCInput : MonoBehaviour
 
     void OnEnable()
     {
-
-        for (int i = 0; i < sh.getCount(); i++)
+        // number of Sources should be variable at runtime, there should either be maps for all possible sources (64) 
+        // or maps have to be generated dynamically
+        for (int i = 0; i < 5; i++)
         {
             string azimuth = "/MultiEncoder/azimuth" + i.ToString();
             string elevation = "/MultiEncoder/elevation" + i.ToString();
@@ -31,5 +30,6 @@ public class OSCInput : MonoBehaviour
             oscIn.Map(elevation, sh.UpdateThroughReaper);
             oscIn.Map(gain, sh.UpdateThroughReaper);
         }
+        oscIn.Map("/MultiEncoder/inputSetting", sh.UpdateThroughReaper);
     }
 }
