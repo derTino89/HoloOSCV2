@@ -15,7 +15,7 @@ public class SourceHandler : MonoBehaviour
     OSCOutput output;
     GameObject handler;
 
-    private float numberOfObjects = 0;
+    private float numberOfObjects = 3;
 
     public void Start() {
        sourceRadius = source.GetComponent<SphereCollider>().radius;
@@ -59,16 +59,7 @@ public class SourceHandler : MonoBehaviour
 
             case "elevation":
                 src = sources[Int32.Parse(message[2])] as GameObject;
-                float elevation = float.Parse(message[0]);
-                if (elevation < -90) {
-                    src.GetComponent<SourceObject>().setElevation(elevation, 2 * (elevation + 90), true);
-                }
-                else if (elevation > 90) {
-                    src.GetComponent<SourceObject>().setElevation(elevation, 2 * (elevation - 90), true);
-                }
-                else {
-                    src.GetComponent<SourceObject>().setElevation(elevation, 0, false);
-                }
+                src.GetComponent<SourceObject>().setElevation(float.Parse(message[0]));
                 break;
 
             case "gain":

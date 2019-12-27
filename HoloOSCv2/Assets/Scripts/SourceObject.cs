@@ -5,23 +5,17 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class SourceObject : MonoBehaviour
 {
     int id = 0;
-    const string azimuth = "/MultiEncoder/azimuth";
-    const string elevation = "/MultiEncoder/elevation";
-    const string gain = "/MultiEncoder/gain";
+    const string AZIMUTH_ADDRESS = "/MultiEncoder/azimuth";
+    const string ELEVATION_ADDRESS = "/MultiEncoder/elevation";
+    const string GAIN_ADDRESS = "/MultiEncoder/gain";
+    [SerializeField]
     float radShell;
     ToolTip toolTip;
 
-    [SerializeField]
-    private float azimuthAngle;
-   [SerializeField]
-    private float elevationAngle;
+    private float phi = 0;
+    private float theta = 0;
 
-    Transform trans;
-    GameObject handler;
-    GameObject Shell;
     OSCOutput output;
-
-    bool obtuseAngle = false;
 
     Material matDefault;
     Material matMin;
@@ -35,12 +29,10 @@ public class SourceObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trans = GetComponent<Transform>().transform;
-        handler = GameObject.FindGameObjectWithTag("OSCHandler");
-        output = handler.GetComponent<OSCOutput>();
-        Shell = GameObject.FindGameObjectWithTag("SourceShell");
-        radShell = Shell.GetComponent<Transform>().transform.localScale.x * Shell.GetComponent<SphereCollider>().radius;
-
+        output = GameObject.FindGameObjectWithTag("OSCHandler").GetComponent<OSCOutput>();
+        radShell = Mathf.Sqrt(transform.position.x * transform.position.x 
+            + transform.position.y * transform.position.y 
+            + transform.position.z * transform.position.z);
         matDefault = Resources.Load("yellow") as Material;
         matMin = Resources.Load("blue") as Material;
 
@@ -48,31 +40,27 @@ public class SourceObject : MonoBehaviour
         setDefaultMat();
         AddToolTip();
 }
-    private void Update() {
-        azimuthAngle = GetAzimuth();
-        elevationAngle = GetElevation();
+
+    private void UpdatePosition()
+    {
+        transform.position = CoordinateTransformService.TransformSphereToCartesian(radShell, theta * Mathf.Deg2Rad, phi * Mathf.Deg2Rad);
     }
 
-    public void setAzimuth(float azimuth)
+    public void setAzimuth(float phi)
     {
-        float radA;
-        if (obtuseAngle)
-        {
-            radA = azimuth * Mathf.Deg2Rad +180;
-        }
-        else
-        {
-            radA = azimuth * Mathf.Deg2Rad;
-        }
-        float radE = this.GetElevation() * Mathf.Deg2Rad;
-        float z = radShell * (Mathf.Cos(radE) * Mathf.Cos(radA));
-        float x = radShell * (Mathf.Cos(radE) * Mathf.Sin(radA));
-        float y = radShell * Mathf.Sin(radE);
-        transform.position = new Vector3(-x, y, z);
+        this.phi = phi;
+        UpdatePosition();
     }
-    public void setElevation(float elevation, float additionalAngleE, bool obtuse)
+
+     public void setElevation(float theta)
     {
-        float radE = elevation * Mathf.Deg2Rad;
+        this.theta = theta;
+        UpdatePosition();
+    }
+    /*old setElevation
+    public void setElevation(float theta, float additionalAngleE, bool obtuse)
+    {
+        float radE = theta * Mathf.Deg2Rad;
         float radA = this.GetAzimuth() * Mathf.Deg2Rad;
         float radAddE = additionalAngleE * Mathf.Deg2Rad;
         float radAddA = 180 * Mathf.Deg2Rad;
@@ -81,7 +69,7 @@ public class SourceObject : MonoBehaviour
             float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA + radAddA));
             float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA + radAddA));
             float y = radShell * Mathf.Sin(radE - radAddE);
-            transform.position = new Vector3(x, y, -z);
+            transform.position = new Vector3(x, y, z);
             obtuseAngle = obtuse;
         }
         else
@@ -89,9 +77,9 @@ public class SourceObject : MonoBehaviour
             float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA));
             float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA));
             float y = radShell * Mathf.Sin(radE - radAddE);
-            transform.position = new Vector3(x, y, -z);
+            transform.position = new Vector3(x, y, z);
         }
-    }
+    }*/
     public void setGain(float gain)
     {
         float newGain = minScale() + ((maxScale() - minScale()) * (gain + 60) / 70);
@@ -108,18 +96,11 @@ public class SourceObject : MonoBehaviour
 
     public float GetElevation()
     {
-        Vector3 position = transform.position;
-        float angle = Mathf.Rad2Deg * Mathf.Atan(position.y / Mathf.Sqrt(position.z * position.z + position.x * position.x));
-        return angle;
-
+        return Mathf.Rad2Deg * Mathf.Asin(transform.position.y / radShell);
     }
     public float GetAzimuth()
     {
-        Vector3 position = transform.position;
-        float angle = Mathf.Rad2Deg * Mathf.Atan(position.x / position.z);
-        angle = position.z > 0 ? angle + 180 : angle;
-        angle = angle > 180 ? angle - 360 : angle;
-        return angle * -1;
+        return Mathf.Rad2Deg * - Mathf.Atan2(transform.position.x, transform.position.z);
     }
     public float GetGain()
     {
@@ -145,17 +126,18 @@ public class SourceObject : MonoBehaviour
     }
 
     public void sendMessageToOSCHandler() {
+        //TODO: Refactoring -> OSC-Handler should handle adresses, SourceObject should only tell OSCHandler its values
         string[] data = new string[2];
 
-        data[0] = azimuth + GetID().ToString();
+        data[0] = AZIMUTH_ADDRESS + GetID().ToString();
         data[1] = GetAzimuth().ToString();
         output.SendMessage("SendOSCMessageToClient", data);
 
-        data[0] = elevation + GetID().ToString();
+        data[0] = ELEVATION_ADDRESS + GetID().ToString();
         data[1] = GetElevation().ToString();
         output.SendMessage("SendOSCMessageToClient", data);
 
-        data[0] = gain + GetID().ToString();
+        data[0] = GAIN_ADDRESS + GetID().ToString();
         data[1] = GetGain().ToString();
         output.SendMessage("SendOSCMessageToClient", data);
     }
@@ -178,11 +160,9 @@ public class SourceObject : MonoBehaviour
         if (gain < -59.5)
         {
             setMinMat();
-            Debug.Log("Channel " + id+1 + " MUTED");
         }
         else {
             setDefaultMat();
-            Debug.Log("Channel " + id + 1 + " UNMUTED");
         }
     }
     public void setDefaultMat() {
