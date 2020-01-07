@@ -30,10 +30,11 @@ public class SourceHandler : MonoBehaviour
             Vector3 spawnPos;
             for (int i = 1; i <= numberOfObjects; i++) {
                 // scale has to be equal in all directions or algorithm has to be changed accordingly
+                    
                 float actualRadius = shellRadius * shell.transform.localScale.x;
                 spawnPos = new Vector3(0,0,1) * actualRadius;
                 GameObject src = Instantiate(source, spawnPos, Quaternion.identity);
-                src.name = "Source" + sources.Count;
+                src.name = "Source" + (sources.Count+1);
                 src.transform.parent = this.transform;
                 src.GetComponent<SolverHandler>().TransformOverride = src.transform.parent;
                 src.GetComponent<RadialView>().MinDistance = actualRadius;

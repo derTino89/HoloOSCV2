@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CoordinateTransformService : MonoBehaviour
 {
+    /// <summary>
+    /// transforms sphere coordinates in radians to cartesian
+    /// </summary>
     public static Vector3 TransformSphereToCartesian(float r, float theta, float phi)
     {
         //theta = 0° ;

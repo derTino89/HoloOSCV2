@@ -8,8 +8,8 @@ public class SourceObject : MonoBehaviour
     const string AZIMUTH_ADDRESS = "/MultiEncoder/azimuth";
     const string ELEVATION_ADDRESS = "/MultiEncoder/elevation";
     const string GAIN_ADDRESS = "/MultiEncoder/gain";
-    const float GAIN_MINIMUM = -60;
-    const float GAIN_MAXIMUM = 10;
+    const float GAIN_NORM_MIN = -60;
+    const float GAIN_NORM_MAX = 70;
 
     private int id = 0;
     private float radShell;
@@ -25,21 +25,21 @@ public class SourceObject : MonoBehaviour
     Material matDefault;
     Material matMin;  
     TransformScaleHandler transformScaleHandler;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        scaleMaximum = transform.localScale.x * 7 / 6;
+        scaleMaximum = transform.localScale.x * 7 / 6; 
         scaleMinimum = scaleMaximum * 2/7;
         transformScaleHandler = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
         transformScaleHandler.ScaleMinimum = scaleMinimum;
         transformScaleHandler.ScaleMaximum = scaleMaximum;
         output = GameObject.FindGameObjectWithTag("OSCHandler").GetComponent<OSCOutput>();
+        toolTip = this.transform.GetChild(0).gameObject.GetComponent<ToolTip>();
+        toolTip.ToolTipText = (id + 1).ToString();
         radShell = Mathf.Sqrt(transform.position.x * transform.position.x  + transform.position.y * transform.position.y + transform.position.z * transform.position.z);
         matDefault = Resources.Load("yellow") as Material;
         matMin = Resources.Load("blue") as Material;
         setDefaultMat();
-        AddToolTip();
     }
 
     private void UpdatePosition()
@@ -64,16 +64,9 @@ public class SourceObject : MonoBehaviour
         output.SendMessage("SendOSCMessageToClient", data);
     }
 
-    public void AddToolTip() {
-        int channel = id + 1;
-        toolTip = this.transform.GetChild(0).gameObject.GetComponent<ToolTip>();
-        toolTip.ToolTipText = channel.ToString();
-        toolTip.transform.localScale = new Vector3(6.0f, 6.0f, 0.1f);
-    }
-
     public void checkMat() {
         float gain = GetGain();
-        if (gain < -59.5) {
+        if (gain < GAIN_NORM_MIN + 0.5f) {
             setMinMat();
         }
         else {
@@ -88,31 +81,19 @@ public class SourceObject : MonoBehaviour
     public void setElevation(float theta) {
         this.theta = theta;
         UpdatePosition();
-    }
-
-    /// <summary>
-    /// returns Elevation of the source
-    /// </summary>
+    } 
     public float GetElevation() {
         return Mathf.Rad2Deg * Mathf.Asin(transform.position.y / radShell);
     }
-    /// <summary>
-    /// returns Azimuth of the source
-    /// </summary>
     public float GetAzimuth() {
         return Mathf.Rad2Deg * -Mathf.Atan2(transform.position.x, transform.position.z);
     }
-    /// <summary>
-    /// returns Gain of the source 
-    /// Value is between GAINMINIMUM and GAINMAXIMUM
-    /// </summary>
-
     public float GetGain() {
         float currentScaleValue = (transform.localScale.x - scaleMinimum) / (scaleMaximum - scaleMinimum); // scaleValue normed between 0 and 1
-        return -60 + currentScaleValue * 70;
+        return GAIN_NORM_MIN + currentScaleValue * GAIN_NORM_MAX;
     }
     public void setGain(float gain) {
-        float newGain = scaleMinimum + ((scaleMaximum - scaleMinimum) * (gain + 60) / 70);
+        float newGain = scaleMinimum + ((scaleMaximum - scaleMinimum) * (gain - GAIN_NORM_MIN) / GAIN_NORM_MAX);
         transform.localScale = new Vector3(newGain, newGain, newGain);
         if (newGain <= scaleMinimum) {
             setMinMat();
@@ -121,14 +102,12 @@ public class SourceObject : MonoBehaviour
             setDefaultMat();
         }
     }
-
     public int GetID() {
         return id;
     }
     public void SetID(int id) {
         this.id = id;
     }    
-
     public void setDefaultMat() {
         GetComponent<MeshRenderer>().material = matDefault;
     }
