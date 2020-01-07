@@ -4,125 +4,47 @@ using Microsoft.MixedReality.Toolkit.UI;
 
 public class SourceObject : MonoBehaviour
 {
-    int id = 0;
+    
     const string AZIMUTH_ADDRESS = "/MultiEncoder/azimuth";
     const string ELEVATION_ADDRESS = "/MultiEncoder/elevation";
     const string GAIN_ADDRESS = "/MultiEncoder/gain";
-    [SerializeField]
-    float radShell;
-    ToolTip toolTip;
+    const float GAIN_MINIMUM = -60;
+    const float GAIN_MAXIMUM = 10;
+
+    private int id = 0;
+    private float radShell;
 
     private float phi = 0;
     private float theta = 0;
 
+    float scaleMinimum;
+    float scaleMaximum;
+
+    ToolTip toolTip;
     OSCOutput output;
-
     Material matDefault;
-    Material matMin;
-    
-    float scaleMinimum = 0.5f;
-    float scaleMaximum = 2.5f;
-    float initialScale;
-
-    TransformScaleHandler scaleScript;
+    Material matMin;  
+    TransformScaleHandler transformScaleHandler;
 
     // Start is called before the first frame update
     void Start()
     {
+        scaleMaximum = transform.localScale.x * 7 / 6;
+        scaleMinimum = scaleMaximum * 2/7;
+        transformScaleHandler = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
+        transformScaleHandler.ScaleMinimum = scaleMinimum;
+        transformScaleHandler.ScaleMaximum = scaleMaximum;
         output = GameObject.FindGameObjectWithTag("OSCHandler").GetComponent<OSCOutput>();
-        radShell = Mathf.Sqrt(transform.position.x * transform.position.x 
-            + transform.position.y * transform.position.y 
-            + transform.position.z * transform.position.z);
+        radShell = Mathf.Sqrt(transform.position.x * transform.position.x  + transform.position.y * transform.position.y + transform.position.z * transform.position.z);
         matDefault = Resources.Load("yellow") as Material;
         matMin = Resources.Load("blue") as Material;
-
-        initiateScales();
         setDefaultMat();
         AddToolTip();
-}
+    }
 
     private void UpdatePosition()
     {
         transform.position = CoordinateTransformService.TransformSphereToCartesian(radShell, theta * Mathf.Deg2Rad, phi * Mathf.Deg2Rad);
-    }
-
-    public void setAzimuth(float phi)
-    {
-        this.phi = phi;
-        UpdatePosition();
-    }
-
-     public void setElevation(float theta)
-    {
-        this.theta = theta;
-        UpdatePosition();
-    }
-    /*old setElevation
-    public void setElevation(float theta, float additionalAngleE, bool obtuse)
-    {
-        float radE = theta * Mathf.Deg2Rad;
-        float radA = this.GetAzimuth() * Mathf.Deg2Rad;
-        float radAddE = additionalAngleE * Mathf.Deg2Rad;
-        float radAddA = 180 * Mathf.Deg2Rad;
-        if (obtuse != obtuseAngle)
-        {
-            float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA + radAddA));
-            float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA + radAddA));
-            float y = radShell * Mathf.Sin(radE - radAddE);
-            transform.position = new Vector3(x, y, z);
-            obtuseAngle = obtuse;
-        }
-        else
-        {
-            float z = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Cos(radA));
-            float x = radShell * (Mathf.Cos(radE - radAddE) * Mathf.Sin(radA));
-            float y = radShell * Mathf.Sin(radE - radAddE);
-            transform.position = new Vector3(x, y, z);
-        }
-    }*/
-    public void setGain(float gain)
-    {
-        float newGain = minScale() + ((maxScale() - minScale()) * (gain + 60) / 70);
-        transform.localScale = new Vector3(newGain, newGain, newGain);
-        if (newGain <= minScale())
-        {
-            setMinMat();
-        }
-        else
-        {
-            setDefaultMat();
-        }
-    }
-
-    public float GetElevation()
-    {
-        return Mathf.Rad2Deg * Mathf.Asin(transform.position.y / radShell);
-    }
-    public float GetAzimuth()
-    {
-        return Mathf.Rad2Deg * - Mathf.Atan2(transform.position.x, transform.position.z);
-    }
-    public float GetGain()
-    {
-        float currentScale = transform.localScale.x;
-        float currentScaleValue = (currentScale - minScale()) / (maxScale() - minScale()); // scaleValue now normed between 0 and 1
-        float currentScaleOSC = -60 + currentScaleValue * 70; // scaleValue stretched for encoder to values from -60 to +10
-        return currentScaleOSC;
-    }
-
-    private void initiateScales() {
-        scaleScript = this.GetComponent<TransformScaleHandler>() as TransformScaleHandler;
-        scaleScript.ScaleMinimum = scaleMinimum;
-        scaleScript.ScaleMaximum = scaleMaximum;
-        initialScale = transform.localScale.x;
-    }
-    private float minScale()
-    {
-        return scaleMinimum * initialScale;
-    }
-    private float maxScale()
-    {
-        return scaleMaximum * initialScale;
     }
 
     public void sendMessageToOSCHandler() {
@@ -141,13 +63,7 @@ public class SourceObject : MonoBehaviour
         data[1] = GetGain().ToString();
         output.SendMessage("SendOSCMessageToClient", data);
     }
-    public int GetID() {
-        return id;
-    }
-    public void SetID(int id) {
-        this.id = id;
-    }
-    
+
     public void AddToolTip() {
         int channel = id + 1;
         toolTip = this.transform.GetChild(0).gameObject.GetComponent<ToolTip>();
@@ -157,14 +73,62 @@ public class SourceObject : MonoBehaviour
 
     public void checkMat() {
         float gain = GetGain();
-        if (gain < -59.5)
-        {
+        if (gain < -59.5) {
             setMinMat();
         }
         else {
             setDefaultMat();
         }
     }
+
+    public void setAzimuth(float phi) {
+        this.phi = phi;
+        UpdatePosition();
+    }
+    public void setElevation(float theta) {
+        this.theta = theta;
+        UpdatePosition();
+    }
+
+    /// <summary>
+    /// returns Elevation of the source
+    /// </summary>
+    public float GetElevation() {
+        return Mathf.Rad2Deg * Mathf.Asin(transform.position.y / radShell);
+    }
+    /// <summary>
+    /// returns Azimuth of the source
+    /// </summary>
+    public float GetAzimuth() {
+        return Mathf.Rad2Deg * -Mathf.Atan2(transform.position.x, transform.position.z);
+    }
+    /// <summary>
+    /// returns Gain of the source 
+    /// Value is between GAINMINIMUM and GAINMAXIMUM
+    /// </summary>
+
+    public float GetGain() {
+        float currentScaleValue = (transform.localScale.x - scaleMinimum) / (scaleMaximum - scaleMinimum); // scaleValue normed between 0 and 1
+        return -60 + currentScaleValue * 70;
+    }
+    public void setGain(float gain) {
+        float newGain = scaleMinimum + ((scaleMaximum - scaleMinimum) * (gain + 60) / 70);
+        transform.localScale = new Vector3(newGain, newGain, newGain);
+        if (newGain <= scaleMinimum) {
+            setMinMat();
+        }
+        else {
+            setDefaultMat();
+        }
+    }
+
+    public int GetID() {
+        return id;
+    }
+    public void SetID(int id) {
+        this.id = id;
+    }    
+
     public void setDefaultMat() {
         GetComponent<MeshRenderer>().material = matDefault;
     }
