@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class GettingStartedSending : UnityEngine.MonoBehaviour
+	public class GettingStartedSending : MonoBehaviour
 	{
 		[SerializeField] OscOut _oscOut;
 

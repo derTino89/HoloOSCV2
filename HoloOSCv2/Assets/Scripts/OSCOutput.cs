@@ -28,8 +28,15 @@ public class OSCOutput : MonoBehaviour
     // data[0] must always be the adress ; adress is taken from https://plugins.iem.at/docs/osc/#multiencoder
     // data[1] must always be the value to send
     public void SendOSCMessageToClient(string[] data) {
-        oscOut.Send(data[0], float.Parse(data[1]));
+        OscMessage msg = new OscMessage(data[0]);
+        msg.Add(data[1]);
+        oscOut.Send(msg);
+        //oscOut.Send(data[0], float.Parse(data[1]));
     }
+    /*public void SendOSCMessageToClient(OscBundle bundle)
+    {
+        oscOut.Send(bundle);
+    }*/
 
     public void UpdateReceiver() {
         string info = GetRecieverInfo();

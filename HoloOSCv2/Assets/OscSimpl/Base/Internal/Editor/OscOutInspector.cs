@@ -25,8 +25,6 @@ namespace OscSimpl
 		SerializedProperty _remoteIpAddress;
 		SerializedProperty _port;
 		SerializedProperty _multicastLoopback;
-		SerializedProperty _bundleMessagesOnEndOfFrame;
-		SerializedProperty _splitBundlesAvoidingBufferOverflow;
 		SerializedProperty _udpBufferSize;
 		SerializedProperty _settingsFoldout;
 		SerializedProperty _messagesFoldout;
@@ -37,8 +35,6 @@ namespace OscSimpl
 		readonly GUIContent _isOpenLabel = new GUIContent( "Is Open", "Indicates whether this OscOut object is open and ready to send. In Edit Mode OSC objects are opened and closed automatically by their inspectors." );
 		readonly GUIContent _openOnAwakeLabel = new GUIContent( "Open On Awake", "Open this OscOut object automatically when Awake is invoked by Unity (at runtime). The setting is only accessible using the inspector in Edit Mode." );
 		readonly GUIContent _multicastLoopbackLabel = new GUIContent( "Multicast Loopback", "Whether outgoing multicast messages are delivered to the sending application." );
-		readonly GUIContent _bundleMessagesOnEndOfFrameLabel = new GUIContent( "Bundle Messages On End Of Frame", "Bundle all messages and send automatically at the end of the frame." );
-		readonly GUIContent _splitBundlesAvoidingBufferOverflowLabel = new GUIContent( "Split Bundles Avoiding Buffer Overflow", "Ensure that bundles sizes never exceed Udp buffer size" );
 		readonly GUIContent _udpBufferSizeLabel = new GUIContent( "Udp Buffer Size" );
 		readonly GUIContent _settingsFoldLabel = new GUIContent( "Settings" );
 
@@ -79,8 +75,6 @@ namespace OscSimpl
 			_remoteIpAddress = serializedObject.FindProperty( "_remoteIpAddress" );
 			_port = serializedObject.FindProperty("_port");
 			_multicastLoopback = serializedObject.FindProperty("_multicastLoopback");
-			_bundleMessagesOnEndOfFrame = serializedObject.FindProperty("_bundleMessagesOnEndOfFrame");
-			_splitBundlesAvoidingBufferOverflow = serializedObject.FindProperty( "_splitBundlesAvoidingBufferOverflow" );
 			_udpBufferSize = serializedObject.FindProperty( "_udpBufferSize" );
 			_settingsFoldout = serializedObject.FindProperty("_settingsFoldout");
 			_messagesFoldout = serializedObject.FindProperty("_messagesFoldout");
@@ -88,9 +82,9 @@ namespace OscSimpl
 			// Store socket info for change check workaround.
 			_tempIPAddress = _remoteIpAddress.stringValue;
 			_tempPort = _port.intValue;
-
-            // Ensure that OscOut scripts will be executed early, so that if Open On Awake is enabled the socket will open before other scripts are called.
-            MonoScript script = MonoScript.FromMonoBehaviour(target as UnityEngine.MonoBehaviour);
+			
+			// Ensure that OscOut scripts will be executed early, so that if Open On Awake is enabled the socket will open before other scripts are called.
+			MonoScript script = MonoScript.FromMonoBehaviour( target as MonoBehaviour );
 			if( MonoImporter.GetExecutionOrder( script ) != executionOrderNum ) MonoImporter.SetExecutionOrder( script, executionOrderNum );
 			
 			// When object is selected in Edit Mode then we start listening.
@@ -99,8 +93,8 @@ namespace OscSimpl
 				_statusInEditMode = _oscOut.mode == OscSendMode.UnicastToSelf ? OscRemoteStatus.Connected : OscRemoteStatus.Unknown;
 			}
 
-			// Subscribe to OSC messages
-			OscEditorUI.AddInspectorMessageListener( _oscOut, OnOSCMessage, ref _inspectorMessageEventObject );
+            // Subscribe to OSC messages
+            _oscOut.MapAnyMessage( OnOSCMessage );
 
 			// If in Edit Mode, then start a coroutine that will update the connection status. Unity can't start coroutines in Runtime.
 			if( !Application.isPlaying && _oscOut.mode == OscSendMode.Unicast ){
@@ -114,8 +108,8 @@ namespace OscSimpl
 			// When object is deselected in Edit Mode then we stop listening.
 			if( !Application.isPlaying && _oscOut.isOpen ) _oscOut.Close();
 
-			// Unsubscribe from messsages.
-			OscEditorUI.RemoveInspectorMessageListener( _oscOut, OnOSCMessage, ref _inspectorMessageEventObject );
+            // Unsubscribe from messsages.
+            _oscOut.UnmapAnyMessage( OnOSCMessage );
 		}
 		
 		
@@ -211,12 +205,13 @@ namespace OscSimpl
 			EditorGUILayout.PropertyField( _openOnAwake, _openOnAwakeLabel );
 			EditorGUI.EndDisabledGroup();
 
-			EditorGUI.indentLevel++;
 
 			// Settings ...
-			_settingsFoldout.boolValue = EditorGUILayout.Foldout( _settingsFoldout.boolValue, _settingsFoldLabel );
+			_settingsFoldout.boolValue = EditorGUILayout.Foldout( _settingsFoldout.boolValue, _settingsFoldLabel, true );
 			if( _settingsFoldout.boolValue )
 			{
+			    EditorGUI.indentLevel++;
+
 				// Multicast loopback field.
 				EditorGUILayout.BeginHorizontal();
 				EditorGUILayout.LabelField( _multicastLoopbackLabel, GUILayout.Width( 150 ) );
@@ -225,12 +220,6 @@ namespace OscSimpl
 				_multicastLoopback.boolValue = EditorGUILayout.Toggle( _multicastLoopback.boolValue, GUILayout.Width( 30 ) );
 				if( EditorGUI.EndChangeCheck() && _oscOut.mode == OscSendMode.Multicast ) _oscOut.multicastLoopback = _multicastLoopback.boolValue;
 				EditorGUILayout.EndHorizontal();
-
-				// Bundle Messages On End Of Frame field.
-				BoolSettingsField( _bundleMessagesOnEndOfFrame, _bundleMessagesOnEndOfFrameLabel );
-
-				// Split Bundles Avoiding Buffer Overflow field.
-				BoolSettingsField( _splitBundlesAvoidingBufferOverflow, _splitBundlesAvoidingBufferOverflowLabel );
 
 				// Udp Buffer Size field. (UI horror get get a end changed event).
 				GUI.SetNextControlName( bufferSizeControlName );
@@ -249,21 +238,27 @@ namespace OscSimpl
 						_oscOut.udpBufferSize = _tempBufferSize; // This will reopen OscOut
 					}
 				}
+
+			    EditorGUI.indentLevel--;
 			}
 
 			// Messages ...
 			EditorGUI.BeginDisabledGroup( !_oscOut.isOpen );
 			GUIContent messagesFoldContent = new GUIContent( "Messages (" + _oscOut.messageCount + ")", "Messages received since last update" );
-			_messagesFoldout.boolValue = EditorGUILayout.Foldout( _messagesFoldout.boolValue, messagesFoldContent );
-			if( _messagesFoldout.boolValue ){
-				_sb.Clear();
+			_messagesFoldout.boolValue = EditorGUILayout.Foldout( _messagesFoldout.boolValue, messagesFoldContent, true );
+			if( _messagesFoldout.boolValue )
+            {
+                EditorGUI.indentLevel++;
+
+                _sb.Clear();
 				_messageStringQueue.CopyTo( _messageStringBuffer, 0 ); // Copy to array so we can iterate backswards.
 				for( int i = _messageStringBuffer.Length-1; i >= 0; i-- ) _sb.AppendLine( _messageStringBuffer[i] );
 				EditorGUILayout.HelpBox( _sb.ToString(), MessageType.None );
-			}
+
+                EditorGUI.indentLevel--;
+            }
 			EditorGUI.EndDisabledGroup();
 
-			EditorGUI.indentLevel--;
 
 			// Apply
 			serializedObject.ApplyModifiedProperties();

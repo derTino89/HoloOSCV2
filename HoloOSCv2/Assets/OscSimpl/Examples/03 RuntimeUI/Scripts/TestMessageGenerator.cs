@@ -1,6 +1,6 @@
 ﻿/*
 	Created by Carl Emil Carlsen.
-	Copyright 2016-2018 Sixth Sensor.
+	Copyright 2016-2019 Sixth Sensor.
 	All rights reserved.
 	http://sixthsensor.dk
 */
@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class TestMessageGenerator : UnityEngine.MonoBehaviour
+	public class TestMessageGenerator : MonoBehaviour
 	{
 		[SerializeField] OscOut _oscOut = null;
 

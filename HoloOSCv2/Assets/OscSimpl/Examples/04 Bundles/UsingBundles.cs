@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class UsingBundles : UnityEngine.MonoBehaviour
+	public class UsingBundles : MonoBehaviour
 	{
 		OscIn _oscIn;
 		OscOut _oscOut;

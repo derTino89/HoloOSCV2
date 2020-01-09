@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class UTF8StringBlob : UnityEngine.MonoBehaviour
+	public class UTF8StringBlob : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

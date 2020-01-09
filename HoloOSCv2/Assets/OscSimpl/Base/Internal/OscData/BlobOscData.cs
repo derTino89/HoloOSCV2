@@ -375,16 +375,18 @@ namespace OscSimpl
 
 		public static bool TryWriteTo( IList<float> values, IList<byte> data, ref int index )
 		{
-			if( !new FourByteOscData( values.Count * FourByteOscData.byteCount ).TryWriteTo( data, ref index ) ) return false;
-			for( int i = 0; i < values.Count; i++ ) if( !new FourByteOscData( values[i] ).TryWriteTo( data, ref index ) ) return false;
+			int count = values.Count;
+			if( !new FourByteOscData( count * FourByteOscData.byteCount ).TryWriteTo( data, ref index ) ) return false;
+			for( int i = 0; i < count; i++ ) if( !new FourByteOscData( values[i] ).TryWriteTo( data, ref index ) ) return false;
 			return true;
 		}
 
 
 		public static bool TryWriteTo( IList<int> values, IList<byte> data, ref int index )
 		{
-			if( !new FourByteOscData( values.Count * FourByteOscData.byteCount ).TryWriteTo( data, ref index ) ) return false;
-			for( int i = 0; i < values.Count; i++ ) if( !new FourByteOscData( values[i] ).TryWriteTo( data, ref index ) ) return false;
+			int count = values.Count;
+			if( !new FourByteOscData( count * FourByteOscData.byteCount ).TryWriteTo( data, ref index ) ) return false;
+			for( int i = 0; i < count; i++ ) if( !new FourByteOscData( values[i] ).TryWriteTo( data, ref index ) ) return false;
 			return true;
 		}
 

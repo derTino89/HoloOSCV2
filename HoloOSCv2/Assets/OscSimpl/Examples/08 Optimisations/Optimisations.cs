@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class Optimisations : UnityEngine.MonoBehaviour
+	public class Optimisations : MonoBehaviour
 	{
 		// We will be sinding this string as an example.
 		public string outgoingText = "Hello";
@@ -21,7 +21,7 @@ namespace OscSimpl.Examples
 		// when strings change content and blobs change length.
 		string _incomingText;
 
-		// Always store strings that never change in constants.
+		// Always store strings that never change in constants. 
 		const string address = "/test";
 
 		OscOut _oscOut;
@@ -37,18 +37,13 @@ namespace OscSimpl.Examples
 			_oscIn.Open( 7000 );
 
 			// OPTIMISATION #1
-			// Ensure that outgoing messages will be bundled automatically.
-			// You can also bundle messages yourself; check the Bundles example.
-			_oscOut.bundleMessagesOnEndOfFrame = true;
-
-			// OPTIMISATION #2
 			// Instantiate outgoing messages once and cache them locally.
 			// If you are sending a single argument that is neither a string
 			// nor a blob, then you can use the optimised method
 			// Send( address, value ) instead.
 			_outgoingMessage = new OscMessage( address );
 
-			// OPTIMISATION #3
+			// OPTIMISATION #2
 			// When receving strings and blobs then handle the message yourself.
 			// Otherwise new strings and byte arrays will be generated continously.
 			_oscIn.Map( address, OnMessageReceived );

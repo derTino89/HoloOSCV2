@@ -11,7 +11,7 @@ using System.Text;
 
 namespace OscSimpl.Examples
 {
-	public class FloatListBlob : UnityEngine.MonoBehaviour
+	public class FloatListBlob : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

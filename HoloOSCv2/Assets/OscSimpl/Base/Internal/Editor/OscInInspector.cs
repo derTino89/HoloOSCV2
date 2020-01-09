@@ -10,6 +10,8 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Reflection;
+using Object = UnityEngine.Object;
 
 namespace OscSimpl
 {
@@ -19,18 +21,17 @@ namespace OscSimpl
 	{
 		OscIn _oscIn;
 		
-		SerializedProperty _openOnAwake;
-		SerializedProperty _port;
-		SerializedProperty _mode;
-		SerializedProperty _multicastAddress;
-		SerializedProperty _filterDuplicates;
-		SerializedProperty _addTimeTagsToBundledMessages;
-		SerializedProperty _mappings;
-		SerializedProperty _dirtyMappings;
-		SerializedProperty _udpBufferSize;
-		SerializedProperty _settingsFoldout;
-		SerializedProperty _mappingsFoldout;
-		SerializedProperty _messagesFoldout;
+		SerializedProperty _openOnAwakeProp;
+		SerializedProperty _portProp;
+		SerializedProperty _modeProp;
+		SerializedProperty _multicastAddressProp;
+		SerializedProperty _filterDuplicatesProp;
+		SerializedProperty _addTimeTagsToBundledMessagesProp;
+		SerializedProperty _mappingsProp;
+		SerializedProperty _udpBufferSizeProp;
+		SerializedProperty _settingsFoldoutProp;
+		SerializedProperty _mappingsFoldoutProp;
+		SerializedProperty _messagesFoldoutProp;
 
 		string _prevControlName;
 		
@@ -47,7 +48,8 @@ namespace OscSimpl
 
 		readonly GUIContent _portLabel = new GUIContent( "Port", "Receiving Port for this computer." );
 		readonly GUIContent _modeLabel = new GUIContent( "Receive Mode", "Transmission mode." );
-		readonly GUIContent _localIpAddressLabel = new GUIContent( "Local IP Address", "The IP address of this device." );
+		readonly GUIContent _localIpAddressLabel = new GUIContent( "Local IP Address", "The primary IP address of this device." );
+        readonly GUIContent _localIpAddressAlternativesLabel = new GUIContent( "Local IP Alternatives", "Alternative IP addresses of this device (when you have multiple network adapters)." );
 		readonly GUIContent _multicastIpAddressLabel = new GUIContent( "Multicast Address", "Multicast group address. Valid range 224.0.0.0 to 239.255.255.255." );
 		readonly GUIContent _isOpenLabel = new GUIContent( "Is Open", "Indicates whether this OscIn object is open and ready to receive. In Edit Mode OSC objects are opened and closed automatically by their inspectors" );
 		readonly GUIContent _openOnAwakeLabel = new GUIContent( "Open On Awake", "Open this Oscin object automatically when Awake is invoked by Unity (at runtime). The setting is only accessible using the inspector in Edit Mode." );
@@ -69,26 +71,25 @@ namespace OscSimpl
 		void OnEnable()
 		{
 			_oscIn = target as OscIn;
-			
-			_openOnAwake = serializedObject.FindProperty("_openOnAwake");
-			_port = serializedObject.FindProperty("_port");
-			_mode = serializedObject.FindProperty("_mode");
-			_multicastAddress = serializedObject.FindProperty("_multicastAddress");
-			_filterDuplicates = serializedObject.FindProperty("_filterDuplicates");
-			_addTimeTagsToBundledMessages = serializedObject.FindProperty("_addTimeTagsToBundledMessages");
-			_mappings = serializedObject.FindProperty("_mappings");
-			_dirtyMappings = serializedObject.FindProperty("_dirtyMappings");
-			_udpBufferSize = serializedObject.FindProperty( "_udpBufferSize" );
-			_settingsFoldout = serializedObject.FindProperty("_settingsFoldout");
-			_mappingsFoldout = serializedObject.FindProperty("_mappingsFoldout");
-			_messagesFoldout = serializedObject.FindProperty("_messagesFoldout");
+
+            _openOnAwakeProp = serializedObject.FindProperty("_openOnAwake");
+			_portProp = serializedObject.FindProperty("_port");
+			_modeProp = serializedObject.FindProperty("_mode");
+            _multicastAddressProp = serializedObject.FindProperty("_multicastAddress");
+            _filterDuplicatesProp = serializedObject.FindProperty("_filterDuplicates");
+            _addTimeTagsToBundledMessagesProp = serializedObject.FindProperty("_addTimeTagsToBundledMessages");
+            _mappingsProp = serializedObject.FindProperty("_mappings");
+            _udpBufferSizeProp = serializedObject.FindProperty( "_udpBufferSize" );
+            _settingsFoldoutProp = serializedObject.FindProperty("_settingsFoldout");
+            _mappingsFoldoutProp = serializedObject.FindProperty("_mappingsFoldout");
+            _messagesFoldoutProp = serializedObject.FindProperty("_messagesFoldout");
 			
 			// Store socket info for change check workaround.
-			_tempPort = _port.intValue;
-			_tempMulticastAddress = _multicastAddress.stringValue;
-
-            // Ensure that OscIn scripts will be executed early, so it can deliver messages before we compute anything.
-            MonoScript script = MonoScript.FromMonoBehaviour(target as UnityEngine.MonoBehaviour);
+			_tempPort = _portProp.intValue;
+			_tempMulticastAddress = _multicastAddressProp.stringValue;
+			
+			// Ensure that OscIn scripts will be executed early, so it can deliver messages before we compute anything.
+			MonoScript script = MonoScript.FromMonoBehaviour( target as MonoBehaviour );
 			if( MonoImporter.GetExecutionOrder( script ) != -5000 ) MonoImporter.SetExecutionOrder( script, -5000 );
 
 			// When object is selected in Edit Mode then we start listening.
@@ -97,8 +98,8 @@ namespace OscSimpl
 				else _oscIn.Open( _oscIn.port, _oscIn.multicastAddress );
 			}
 
-			// Subscribe to messages.
-			OscEditorUI.AddInspectorMessageListener( _oscIn, OnOSCMessage, ref _inspectorMessageEventObject );
+            // Subscribe to messages.
+            _oscIn.MapAnyMessage( OnOSCMessage );
 		}
 		
 		
@@ -107,8 +108,8 @@ namespace OscSimpl
 			// When object is deselected in Edit Mode then we stop listening.
 			if( !Application.isPlaying && _oscIn.isOpen ) _oscIn.Close();
 
-			// Unsubscribe from messsages.
-			OscEditorUI.RemoveInspectorMessageListener( _oscIn, OnOSCMessage, ref _inspectorMessageEventObject );
+            // Unsubscribe from messsages.
+            _oscIn.UnmapAnyMessage( OnOSCMessage );
 		}
 
 
@@ -131,7 +132,7 @@ namespace OscSimpl
 			GUI.SetNextControlName( portControlName );
 			int newPort = EditorGUILayout.IntField( _portLabel, _oscIn.port );
 			if( EditorGUI.EndChangeCheck() ){
-				_port.intValue = newPort;
+				_portProp.intValue = newPort;
 				if( _oscIn.isOpen ) _oscIn.Close(); // Close UDPReceiver while editing
 			}
 			currentControlName = GUI.GetNameOfFocusedControl();
@@ -139,26 +140,26 @@ namespace OscSimpl
 			if( enterKeyDownPort ) UnfocusAndUpdateUI();
 			bool deselect = _prevControlName == portControlName && currentControlName != portControlName;
 			if( ( deselect || enterKeyDownPort ) && !_oscIn.isOpen ){
-				if( _oscIn.Open( _port.intValue ) ){
-					_tempPort = _port.intValue;
+				if( _oscIn.Open( _portProp.intValue ) ){
+					_tempPort = _portProp.intValue;
 				} else {
-					_port.intValue = _tempPort; // undo
-					_oscIn.Open( _port.intValue );
+					_portProp.intValue = _tempPort; // undo
+					_oscIn.Open( _portProp.intValue );
 				}
 			}
 
 			// Mode field
 			EditorGUI.BeginChangeCheck();
-			EditorGUILayout.PropertyField( _mode, _modeLabel );
+			EditorGUILayout.PropertyField( _modeProp, _modeLabel );
 			if( EditorGUI.EndChangeCheck() ){
-				switch( (OscReceiveMode) _mode.enumValueIndex ){
+				switch( (OscReceiveMode) _modeProp.enumValueIndex ){
 					case OscReceiveMode.UnicastBroadcast:
 						_oscIn.Open( _oscIn.port, string.Empty );
-						_multicastAddress.stringValue = string.Empty;
+                        _multicastAddressProp.stringValue = string.Empty;
 						break;
 					case OscReceiveMode.UnicastBroadcastMulticast:
 						_oscIn.Open( _oscIn.port, OscConst.multicastAddressDefault );
-						_multicastAddress.stringValue = OscConst.multicastAddressDefault;
+                        _multicastAddressProp.stringValue = OscConst.multicastAddressDefault;
 						break;
 				}
 			}
@@ -168,7 +169,7 @@ namespace OscSimpl
 			{
 				EditorGUI.BeginChangeCheck();
 				GUI.SetNextControlName( multicastAddressControlName );
-				EditorGUILayout.PropertyField( _multicastAddress, _multicastIpAddressLabel );
+				EditorGUILayout.PropertyField(_multicastAddressProp, _multicastIpAddressLabel );
 				if( EditorGUI.EndChangeCheck() ){
 					if( _oscIn.isOpen ) _oscIn.Close(); // Close socket while editing
 				}
@@ -177,16 +178,16 @@ namespace OscSimpl
 				if( enterKeyDownMulticastIpAddress ) UnfocusAndUpdateUI();
 				deselect = _prevControlName == multicastAddressControlName && currentControlName != multicastAddressControlName;
 				if( ( deselect || enterKeyDownMulticastIpAddress ) && !_oscIn.isOpen ){
-					if( _oscIn.Open( _port.intValue, _multicastAddress.stringValue ) ){
-						_tempMulticastAddress = _multicastAddress.stringValue;
+					if( _oscIn.Open( _portProp.intValue, _multicastAddressProp.stringValue ) ){
+						_tempMulticastAddress = _multicastAddressProp.stringValue;
 					} else {
-						_multicastAddress.stringValue = _tempMulticastAddress; // undo
-						_oscIn.Open( _port.intValue, _multicastAddress.stringValue );
+                        _multicastAddressProp.stringValue = _tempMulticastAddress; // undo
+						_oscIn.Open( _portProp.intValue, _multicastAddressProp.stringValue );
 					}
 				}
 			}
 
-			// IP Address field. TODO improve
+			// IP Address field.
 			EditorGUILayout.BeginVertical();
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.PrefixLabel( _localIpAddressLabel );
@@ -196,6 +197,23 @@ namespace OscSimpl
 			EditorGUILayout.EndHorizontal();
 			EditorGUILayout.EndVertical();
 
+            // Alternative IP Addresses field.
+            if( OscIn.localIpAddressAlternatives.Count > 0 ) {
+                int i = 0;
+                foreach( string ip in OscIn.localIpAddressAlternatives ) {
+                    EditorGUILayout.BeginVertical();
+			        EditorGUILayout.BeginHorizontal();
+			        EditorGUILayout.PrefixLabel( new GUIContent( _localIpAddressAlternativesLabel.text + "[" + i + "]", _localIpAddressAlternativesLabel.tooltip ) );
+			        EditorGUILayout.LabelField( " " );
+			        rect = GUILayoutUtility.GetLastRect(); // UI voodoo to position the selectable label perfectly
+			        EditorGUI.SelectableLabel( rect, ip );
+			        EditorGUILayout.EndHorizontal();
+			        EditorGUILayout.EndVertical();
+                    i++;
+                }
+
+            }
+
 			// Is Open field
 			EditorGUI.BeginDisabledGroup( true );
 			EditorGUILayout.Toggle( _isOpenLabel, _oscIn.isOpen );
@@ -203,26 +221,27 @@ namespace OscSimpl
 
 			// Open On Awake field
 			EditorGUI.BeginDisabledGroup( Application.isPlaying );
-			EditorGUILayout.PropertyField( _openOnAwake, _openOnAwakeLabel );
+			EditorGUILayout.PropertyField( _openOnAwakeProp, _openOnAwakeLabel );
 			EditorGUI.EndDisabledGroup();
 
-			EditorGUI.indentLevel++;
 
-			// Settings ...
-			_settingsFoldout.boolValue = EditorGUILayout.Foldout( _settingsFoldout.boolValue, _settingsFoldLabel );
+            // Settings ...
+            _settingsFoldoutProp.boolValue = EditorGUILayout.Foldout(_settingsFoldoutProp.boolValue, _settingsFoldLabel, true );
 
-			if( _settingsFoldout.boolValue )
+			if( _settingsFoldoutProp.boolValue )
 			{
+			    EditorGUI.indentLevel++;
+
 				// Filter Duplicates field
-				BoolSettingsField( _filterDuplicates, _filterDuplicatesLabel );
+				BoolSettingsField(_filterDuplicatesProp, _filterDuplicatesLabel );
 
 				// Add Time Tags To Bundled Messages field.
-				BoolSettingsField( _addTimeTagsToBundledMessages, _addTimeTagsToBundledMessagesLabel );
+				BoolSettingsField(_addTimeTagsToBundledMessagesProp, _addTimeTagsToBundledMessagesLabel );
 
 				// Udp Buffer Size field. (UI horror get get a end changed event).
 				GUI.SetNextControlName( bufferSizeControlName );
 				EditorGUI.BeginChangeCheck();
-				int newBufferSize = EditorGUILayout.IntField( _udpBufferSizeLabel, _udpBufferSize.intValue );
+				int newBufferSize = EditorGUILayout.IntField( _udpBufferSizeLabel, _udpBufferSizeProp.intValue );
 				if( EditorGUI.EndChangeCheck() ) {
 					_tempBufferSize = Mathf.Clamp( newBufferSize, OscConst.udpBufferSizeMin, OscConst.udpBufferSizeMax );
 				}
@@ -231,32 +250,36 @@ namespace OscSimpl
 				if( enterKeyDownBufferSize ) UnfocusAndUpdateUI();
 				deselect = _prevControlName == bufferSizeControlName && currentControlName != bufferSizeControlName;
 				if( enterKeyDownBufferSize || deselect ) {
-					if( _tempBufferSize != _udpBufferSize.intValue ) {
-						_udpBufferSize.intValue = _tempBufferSize;
-						_oscIn.udpBufferSize = _tempBufferSize; // // This will reopen OscIn
+					if( _tempBufferSize != _udpBufferSizeProp.intValue ) {
+                        _udpBufferSizeProp.intValue = _tempBufferSize;
+						_oscIn.udpBufferSize = _tempBufferSize; // This will reopen OscIn
 					}
 				}
-			}
+
+                EditorGUI.indentLevel--;
+            }
 
 			// Mappings ...
-			string mappingsFoldLabel = "Mappings (" + _mappings.arraySize + ")";
-			_mappingsFoldout.boolValue = EditorGUILayout.Foldout( _mappingsFoldout.boolValue, mappingsFoldLabel );
-			if( _mappingsFoldout.boolValue )
+			string mappingsFoldLabel = "Mappings (" + _mappingsProp.arraySize + ")";
+            _mappingsFoldoutProp.boolValue = EditorGUILayout.Foldout(_mappingsFoldoutProp.boolValue, mappingsFoldLabel, true );
+			if( _mappingsFoldoutProp.boolValue )
 			{
-				// Mapping elements ..
-				int removeIndexRequsted = -1;
+                EditorGUI.indentLevel++;
+                EditorGUI.BeginDisabledGroup( Application.isPlaying );
 
-				for( int m=0; m<_mappings.arraySize; m++ )
+                // Mapping elements ..
+                int removeIndexRequsted = -1;
+
+				for( int m=0; m<_mappingsProp.arraySize; m++ )
 				{
-					SerializedProperty mapping = _mappings.GetArrayElementAtIndex( m );
+					SerializedProperty mappingProp = _mappingsProp.GetArrayElementAtIndex( m );
 
-					// Mapping field (using costum property drawer)
-					EditorGUI.BeginChangeCheck();
-					EditorGUILayout.PropertyField( mapping, true );
+                    // Mapping field (using custom property drawer)
+                    EditorGUI.BeginChangeCheck();
+					EditorGUILayout.PropertyField( mappingProp );
 					if( EditorGUI.EndChangeCheck() ){
-						SerializedProperty address = mapping.FindPropertyRelative( mappingAddressFieldName );
-						address.stringValue = GetSanitizedAndUniqueAddress( _mappings, m, address.stringValue );
-						_dirtyMappings.boolValue = true;
+						SerializedProperty addressProp = mappingProp.FindPropertyRelative( mappingAddressFieldName );
+                        addressProp.stringValue = GetSanitizedAndUniqueAddress( _mappingsProp, m, addressProp.stringValue );
 					}
 					
 					// Remove mapping button
@@ -271,35 +294,44 @@ namespace OscSimpl
 				
 				// Handle mapping removal ..
 				if( removeIndexRequsted != -1 ){
-					_mappings.DeleteArrayElementAtIndex( removeIndexRequsted );
-					_dirtyMappings.boolValue = true;
+                    _mappingsProp.DeleteArrayElementAtIndex( removeIndexRequsted );
+ 
 				}
 				
 				// Add mapping button
 				rect = EditorGUI.IndentedRect( GUILayoutUtility.GetRect( 20, 30 ) );
-				if( GUI.Button( rect, _addMappingButtonLabel ) ){
-					_mappings.InsertArrayElementAtIndex( _mappings.arraySize );
-					SerializedProperty mapping = _mappings.GetArrayElementAtIndex( _mappings.arraySize-1 );
-					SerializedProperty address = mapping.FindPropertyRelative( mappingAddressFieldName );
-					address.stringValue = GetSanitizedAndUniqueAddress( _mappings, -1, address.stringValue );
-					_dirtyMappings.boolValue = true;
-				}
+				if( GUI.Button( rect, _addMappingButtonLabel ) )
+                {
+                    string newAddress = GetSanitizedAndUniqueAddress( _mappingsProp, -1, "/" );
+                    FieldInfo meppingsInfo =  serializedObject.targetObject.GetType().GetField( _mappingsProp.propertyPath, BindingFlags.Instance | BindingFlags.NonPublic );
+                    List<OscMapping> mappings = (List<OscMapping>) meppingsInfo.GetValue( serializedObject.targetObject );
+                    OscMapping mapping = new OscMapping( newAddress, OscMessageType.OscMessage );
+                    
+                    mapping.AddEmptyEntry();
+                    mappings.Add( mapping );
+                }
 				EditorGUILayout.Space();
-			}
+
+                EditorGUI.EndDisabledGroup();
+                EditorGUI.indentLevel--;
+            }
 
 			// Messages foldout
 			_sb.Length = 0;
 			_sb.Append( "Messages (" ); _sb.Append( _oscIn.messageCount ); _sb.Append( ")" );
 			GUIContent messagesFoldContent = new GUIContent( _sb.ToString(), "Messages received since last update" );
-			_messagesFoldout.boolValue = EditorGUILayout.Foldout( _messagesFoldout.boolValue, messagesFoldContent );
-			if( _messagesFoldout.boolValue ){
-				_sb.Clear();
+            _messagesFoldoutProp.boolValue = EditorGUILayout.Foldout(_messagesFoldoutProp.boolValue, messagesFoldContent, true );
+			if( _messagesFoldoutProp.boolValue )
+            {
+                EditorGUI.indentLevel++;
+
+                _sb.Clear();
 				_messageStringQueue.CopyTo( _messageStringBuffer, 0 ); // Copy to array so we can iterate backswards.
 				for( int i = _messageStringBuffer.Length-1; i >= 0; i-- ) _sb.AppendLine( _messageStringBuffer[i] );
 				EditorGUILayout.HelpBox( _sb.ToString(), MessageType.None );
-			}
-			
-			EditorGUI.indentLevel--;
+
+                EditorGUI.indentLevel--;
+            }
 
 			// Apply
 			serializedObject.ApplyModifiedProperties();
