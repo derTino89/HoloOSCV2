@@ -8,6 +8,7 @@ TagManager:
   - Source
   - SourceShell
   - OSCHandler
+  - StatusCheck
   layers:
   - Default
   - TransparentFX

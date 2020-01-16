@@ -9,6 +9,8 @@ public class OSCOutput : MonoBehaviour
     [SerializeField]
     private OscOut oscOut;
 
+    private ConnectionStatusCheck csc;
+
     [SerializeField]
     string port;
     [SerializeField]
@@ -20,12 +22,12 @@ public class OSCOutput : MonoBehaviour
         port = "8000";
         ipadress = "127.0.0.1";
         oscOut = gameObject.GetComponent<OscOut>();
+        csc = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>();
     }
 
     // data[0] must always be the adress ; adress is taken from https://plugins.iem.at/docs/osc/#multiencoder
     // data[1] must always be the value to send
     public void SendOSCMessageToClient(string[] data) {
-        //Debug.Log("Sent a Message to the Client: " + ipadress + ":" + port + " adress: "+data[0]+" message: "+ data[1]);
         oscOut.Send(data[0], float.Parse(data[1]));
     }
 
@@ -41,6 +43,7 @@ public class OSCOutput : MonoBehaviour
             SetPort("8000");
         }
         OpenReciever();
+        csc.sendMute64(0);
     }
     public void OpenReciever() {
         oscOut.Open(Int32.Parse(port), ipadress);

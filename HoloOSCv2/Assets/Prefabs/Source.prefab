@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876711951391941708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8691013048217209521}
@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 1327461097190608843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 8691013048217209521}
   m_Father: {fileID: 0}
@@ -300,7 +300,7 @@ MonoBehaviour:
   targetTransform: {fileID: 1327461097190608881}
   scaleMinimum: 0
   scaleMaximum: 0
-  relativeToInitialState: 1
+  relativeToInitialState: 0
 --- !u!1 &3974435328859267028
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +332,7 @@ Transform:
   m_GameObject: {fileID: 3974435328859267028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.001}
-  m_LocalScale: {x: 0.07782897, y: 0.016995355, z: 1}
+  m_LocalScale: {x: 0.093105406, y: 0.027770272, z: 1}
   m_Children: []
   m_Father: {fileID: 1844777648069511987}
   m_RootOrder: 1
@@ -702,7 +702,7 @@ Transform:
   m_GameObject: {fileID: 5055195035291111377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3839734991094009459}
   - {fileID: 547607746394649564}
@@ -865,8 +865,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -960,8 +960,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7272291723360917649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 5138759748277328200}
   - {fileID: 120364994735423697}
@@ -993,8 +993,8 @@ MonoBehaviour:
   toolTipText: iiiiiiii
   backgroundPadding: {x: 0.075, y: 0.015}
   backgroundOffset: {x: 0, y: 0, z: 0}
-  contentScale: 2
-  fontSize: 30
+  contentScale: 3
+  fontSize: 48
   attachPointType: 9
   attachPointOffset: {x: 0, y: 0, z: 0}
   toolTipLine: {fileID: 7603921105724750482}
@@ -1101,10 +1101,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   uniformDistortionStrength: 1
   startPoint:
-    position: {x: 0, y: 0.5, z: 0}
+    position: {x: 0, y: -0.125, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   endPoint:
-    position: {x: 0, y: 0.26699537, z: 0}
+    position: {x: 0, y: 0.20834461, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &2533624522062675646
 MonoBehaviour:
@@ -1249,7 +1249,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -0.023300463, z: 0}
+  - {x: 0, y: 0.26667568, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
