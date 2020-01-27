@@ -1,0 +1,9 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'Dokumentation_HoloOSCv2.blg'
+[92] biber-MSWIN64:322> INFO - === 
+[116] Biber.pm:415> INFO - Reading 'Dokumentation_HoloOSCv2.bcf'
+[263] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
+[273] Utils.pm:304> WARN - The file 'Dokumentation_HoloOSCv2.bcf' does not contain any citations!
+[286] bbl.pm:652> INFO - Writing 'Dokumentation_HoloOSCv2.bbl' with encoding 'UTF-8'
+[287] bbl.pm:755> INFO - Output to Dokumentation_HoloOSCv2.bbl
+[288] Biber.pm:128> INFO - WARNINGS: 1

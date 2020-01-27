@@ -1,0 +1,21 @@
+\BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Theorie}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Augmented Reality}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{3D-Audio}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{Verwendete Hard- und Software}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.3.1}{Audio}{section.2.3}% 6
+\BOOKMARK [2][-]{subsection.2.3.2}{Video}{section.2.3}% 7
+\BOOKMARK [2][-]{subsection.2.3.3}{Daten\374bertragung}{section.2.3}% 8
+\BOOKMARK [2][-]{subsection.2.3.4}{Versionskontrolle}{section.2.3}% 9
+\BOOKMARK [0][-]{chapter.3}{Praxis}{}% 10
+\BOOKMARK [1][-]{section.3.1}{Aufgabenstellung der Arbeit}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.2}{Ergebnisse}{chapter.3}% 12
+\BOOKMARK [2][-]{subsection.3.2.1}{Systemarchitektur gem\344\337 C4-Modell}{section.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.2.2}{OSC-Verbindung zwischen Unity und IEM MultiEncoder}{section.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.2.3}{Berechnung und Auswertung der Parameter}{section.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.2.4}{Tooltips zur Kanalzuordnung}{section.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.2.5}{Entwicklungsszene in Unity}{section.3.2}% 17
+\BOOKMARK [0][-]{chapter.4}{Zusammenfassung}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Ergebnis}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Diskussion}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Ausblick}{chapter.4}% 21
