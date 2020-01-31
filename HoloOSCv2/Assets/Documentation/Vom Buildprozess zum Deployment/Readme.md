@@ -2,7 +2,7 @@
 ### Kurzeinführung zum Entwicklungsprozess für Mixed-Reality-Applikationen mit der Microsoft HoloLens
 
 Hinweis: Es wird davon ausgegangen, dass alle notwendigen Tools bereits installiert sind und die Anweisungen in "Getting started with MRTK" durchgeführt worden sind (https://microsoft.github.io/MixedRealityToolkit-Unity/Documentation/GettingStartedWithTheMRTK.html)
-(Bild required Steps)
+![](../images/Deploying to HoloLens/1_Required steps to import MRTK.PNG "Required Steps")
 
 ## Unity-Einstellungen
 
