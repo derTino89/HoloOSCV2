@@ -16,5 +16,632 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{MR}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8876943e9b079dd08c7dfeb2466c2574}{%
+           family={Mauch},
+           familyi={M\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{8876943e9b079dd08c7dfeb2466c2574}
+      \strng{fullhash}{8876943e9b079dd08c7dfeb2466c2574}
+      \strng{bibnamehash}{8876943e9b079dd08c7dfeb2466c2574}
+      \strng{authorbibnamehash}{8876943e9b079dd08c7dfeb2466c2574}
+      \strng{authornamehash}{8876943e9b079dd08c7dfeb2466c2574}
+      \strng{authorfullhash}{8876943e9b079dd08c7dfeb2466c2574}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Virtual Reality, Augmented Reality und 360-Grad-Videos: Was sind die Unterschiede?}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://www.tinkla.com/virtual-reality-augmented-reality-360-grad-videos-unterschiede/
+      \endverb
+      \verb{url}
+      \verb https://www.tinkla.com/virtual-reality-augmented-reality-360-grad-videos-unterschiede/
+      \endverb
+    \endentry
+    \entry{AR}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AR (augmented reality)}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.itwissen.info/AR-augmented-reality-Erweiterte-Realitaet.html
+      \endverb
+      \verb{url}
+      \verb https://www.itwissen.info/AR-augmented-reality-Erweiterte-Realitaet.html
+      \endverb
+    \endentry
+    \entry{AudioLabs}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{2}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{3D Audio}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.audiolabs-erlangen.de/research/3d-audio
+      \endverb
+      \verb{url}
+      \verb https://www.audiolabs-erlangen.de/research/3d-audio
+      \endverb
+    \endentry
+    \entry{Reaper}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{3}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Reaper: Digital Audio Workstation}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.reaper.fm/
+      \endverb
+      \verb{url}
+      \verb https://www.reaper.fm/
+      \endverb
+    \endentry
+    \entry{IEM}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{4}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{IEM Plug-in Suite}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://plugins.iem.at/
+      \endverb
+      \verb{url}
+      \verb https://plugins.iem.at/
+      \endverb
+    \endentry
+    \entry{HoloLens}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{5}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Microsoft HoloLens}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/Microsoft_HoloLens
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/Microsoft_HoloLens
+      \endverb
+    \endentry
+    \entry{Mixed}{online}{}
+      \name{author}{1}{}{%
+        {{hash=14362a6ff6f9ce683ab1880b131cced2}{%
+           family={Bastian},
+           familyi={B\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{14362a6ff6f9ce683ab1880b131cced2}
+      \strng{fullhash}{14362a6ff6f9ce683ab1880b131cced2}
+      \strng{bibnamehash}{14362a6ff6f9ce683ab1880b131cced2}
+      \strng{authorbibnamehash}{14362a6ff6f9ce683ab1880b131cced2}
+      \strng{authornamehash}{14362a6ff6f9ce683ab1880b131cced2}
+      \strng{authorfullhash}{14362a6ff6f9ce683ab1880b131cced2}
+      \field{sortinit}{8}
+      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Hololens 2: Microsofts AR-Brille wird ab sofort ausgeliefert}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://mixed.de/hololens-2-microsofts-ar-brille-wird-ab-sofort-ausgeliefert/
+      \endverb
+      \verb{url}
+      \verb https://mixed.de/hololens-2-microsofts-ar-brille-wird-ab-sofort-ausgeliefert/
+      \endverb
+    \endentry
+    \entry{Gesture}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{6}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Operatorhandbuch für Dynamics 365 Guides}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://docs.microsoft.com/de-de/dynamics365/mixed-reality/guides/operator-guide
+      \endverb
+      \verb{url}
+      \verb https://docs.microsoft.com/de-de/dynamics365/mixed-reality/guides/operator-guide
+      \endverb
+    \endentry
+    \entry{MRTK}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{7}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{What is the Mixed Reality Tollkit}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://microsoft.github.io/MixedRealityToolkit-Unity/README.html
+      \endverb
+      \verb{url}
+      \verb https://microsoft.github.io/MixedRealityToolkit-Unity/README.html
+      \endverb
+    \endentry
+    \entry{Unity-Engine}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{8}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unity (Spiel-Engine)}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/Unity_(Spiel-Engine)
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/Unity_(Spiel-Engine)
+      \endverb
+    \endentry
+    \entry{Spiel-Engine}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{9}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Spiel-Engine}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/Spiel-Engine
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/Spiel-Engine
+      \endverb
+    \endentry
+    \entry{Unity}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{10}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Unity f{ü}r alle}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://unity.com/de
+      \endverb
+      \verb{url}
+      \verb https://unity.com/de
+      \endverb
+    \endentry
+    \entry{OSC}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{11}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Introduction to OSC}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://opensoundcontrol.org/introduction-osc
+      \endverb
+      \verb{url}
+      \verb http://opensoundcontrol.org/introduction-osc
+      \endverb
+    \endentry
+    \entry{sixth-sensor}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{12}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{sixth sensor}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://sixthsensor.dk/
+      \endverb
+      \verb{url}
+      \verb https://sixthsensor.dk/
+      \endverb
+    \endentry
+    \entry{OscSimple}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{13}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{OSC simpl}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://assetstore.unity.com/packages/tools/input-management/osc-simpl-53710
+      \endverb
+      \verb{url}
+      \verb https://assetstore.unity.com/packages/tools/input-management/osc-simpl-53710
+      \endverb
+    \endentry
+    \entry{Git}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{14}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Git}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/Git
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/Git
+      \endverb
+    \endentry
+    \entry{Github}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{15}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Github}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/GitHub
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/GitHub
+      \endverb
+    \endentry
+    \entry{C4}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0653a11aad687a389587e0000e0f4a13}{%
+           family={Brown},
+           familyi={B\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{0653a11aad687a389587e0000e0f4a13}
+      \strng{fullhash}{0653a11aad687a389587e0000e0f4a13}
+      \strng{bibnamehash}{0653a11aad687a389587e0000e0f4a13}
+      \strng{authorbibnamehash}{0653a11aad687a389587e0000e0f4a13}
+      \strng{authornamehash}{0653a11aad687a389587e0000e0f4a13}
+      \strng{authorfullhash}{0653a11aad687a389587e0000e0f4a13}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The C4 model for visualising software architecture: Context, Containers, Components and Code}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://c4model.com
+      \endverb
+      \verb{url}
+      \verb https://c4model.com
+      \endverb
+    \endentry
+    \entry{Kugel}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{16}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Kugelkoordinaten}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://de.wikipedia.org/wiki/Kugelkoordinaten
+      \endverb
+      \verb{url}
+      \verb https://de.wikipedia.org/wiki/Kugelkoordinaten
+      \endverb
+    \endentry
+    \entry{MRTKGit}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8027ee61ae7611f2d0c61348c0bb2f3b}{%
+           family={Jasche},
+           familyi={J\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \strng{fullhash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \strng{bibnamehash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \strng{authorbibnamehash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \strng{authornamehash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \strng{authorfullhash}{8027ee61ae7611f2d0c61348c0bb2f3b}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Hololens 1 keyboard \#5169}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/microsoft/MixedRealityToolkit-Unity/issues/5169
+      \endverb
+      \verb{url}
+      \verb https://github.com/microsoft/MixedRealityToolkit-Unity/issues/5169
+      \endverb
+    \endentry
+    \entry{OscSimpl87}{online}{}
+      \name{author}{1}{}{%
+        {{hash=c5bd6b1714874c8c77c4540d26d05b18}{%
+           family={o.A.},
+           familyi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{fullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{bibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorbibnamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authornamehash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \strng{authorfullhash}{c5bd6b1714874c8c77c4540d26d05b18}
+      \field{extraname}{17}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{[RELEASED] OSC simpl}
+      \field{urlday}{29}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{o.J.}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://forum.unity.com/threads/released-osc-simpl.382244/page-2
+      \endverb
+      \verb{url}
+      \verb https://forum.unity.com/threads/released-osc-simpl.382244/page-2
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

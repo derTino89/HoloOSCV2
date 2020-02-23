@@ -55,8 +55,8 @@
       <file>biblatex.def</file>
       <file>blx-natbib.def</file>
       <file>standard.bbx</file>
-      <file>authoryear.bbx</file>
-      <file>authoryear-icomp.cbx</file>
+      <file>numeric.bbx</file>
+      <file>numeric.cbx</file>
       <file>biblatex.cfg</file>
       <file>german.lbx</file>
       <file>ngerman.lbx</file>
@@ -81,7 +81,7 @@
       <file>Dokumentation_HoloOSCv2.bcf</file>
     </requires>
     <requires type="editable">
-      <file>~/Bibliothek/literatur.bib</file>
+      <file>references.bib</file>
     </requires>
   </external>
 </requests>

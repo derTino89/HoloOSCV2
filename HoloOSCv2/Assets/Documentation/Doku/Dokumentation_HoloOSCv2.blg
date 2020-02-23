@@ -1,9 +1,28 @@
 [0] Config.pm:304> INFO - This is Biber 2.14
 [0] Config.pm:307> INFO - Logfile is 'Dokumentation_HoloOSCv2.blg'
-[92] biber-MSWIN64:322> INFO - === 
-[116] Biber.pm:415> INFO - Reading 'Dokumentation_HoloOSCv2.bcf'
-[263] Biber.pm:943> INFO - Found 0 citekeys in bib section 0
-[273] Utils.pm:304> WARN - The file 'Dokumentation_HoloOSCv2.bcf' does not contain any citations!
-[286] bbl.pm:652> INFO - Writing 'Dokumentation_HoloOSCv2.bbl' with encoding 'UTF-8'
-[287] bbl.pm:755> INFO - Output to Dokumentation_HoloOSCv2.bbl
-[288] Biber.pm:128> INFO - WARNINGS: 1
+[73] biber-MSWIN64:322> INFO - === 
+[92] Biber.pm:415> INFO - Reading 'Dokumentation_HoloOSCv2.bcf'
+[192] Biber.pm:943> INFO - Found 21 citekeys in bib section 0
+[209] Biber.pm:4256> INFO - Processing section 0
+[210] Utils.pm:75> INFO - Globbing data source 'references.bib'
+[219] Utils.pm:91> INFO - Globbed data source 'references.bib' to references.bib
+[235] Biber.pm:4455> INFO - Looking for bibtex format file 'references.bib' for section 0
+[237] bibtex.pm:1653> INFO - LaTeX decoding ...
+[263] bibtex.pm:1471> INFO - Found BibTeX data source 'references.bib'
+[288] Utils.pm:304> WARN - year field 'o.J.' in entry 'AudioLabs' is not an integer - this will probably not sort properly.
+[290] Utils.pm:304> WARN - year field 'o.J.' in entry 'Reaper' is not an integer - this will probably not sort properly.
+[293] Utils.pm:304> WARN - year field 'o.J.' in entry 'IEM' is not an integer - this will probably not sort properly.
+[305] Utils.pm:304> WARN - year field 'o.J.' in entry 'MRTK' is not an integer - this will probably not sort properly.
+[313] Utils.pm:304> WARN - year field 'o.J.' in entry 'Unity' is not an integer - this will probably not sort properly.
+[316] Utils.pm:304> WARN - year field 'o.J.' in entry 'OSC' is not an integer - this will probably not sort properly.
+[319] Utils.pm:304> WARN - year field 'o.J.' in entry 'sixth-sensor' is not an integer - this will probably not sort properly.
+[322] Utils.pm:304> WARN - year field 'o.J.' in entry 'OscSimple' is not an integer - this will probably not sort properly.
+[330] Utils.pm:304> WARN - year field 'o.J.' in entry 'C4' is not an integer - this will probably not sort properly.
+[338] Utils.pm:304> WARN - year field 'o.J.' in entry 'OscSimpl87' is not an integer - this will probably not sort properly.
+[360] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[360] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[360] Biber.pm:4084> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'de-DE'
+[360] Biber.pm:4090> INFO - No sort tailoring available for locale 'de-DE'
+[380] bbl.pm:652> INFO - Writing 'Dokumentation_HoloOSCv2.bbl' with encoding 'UTF-8'
+[388] bbl.pm:755> INFO - Output to Dokumentation_HoloOSCv2.bbl
+[388] Biber.pm:128> INFO - WARNINGS: 10

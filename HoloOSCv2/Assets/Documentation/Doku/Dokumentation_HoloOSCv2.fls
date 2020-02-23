@@ -1,7 +1,7 @@
-PWD e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku
+PWD c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku
 INPUT C:\Users\tlieb\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.tex
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.log
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.tex
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.log
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fleqn.clo
@@ -62,8 +62,8 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\intcalc\intca
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\intcalc\intcalc.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\etexcmds\etexcmds.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\etexcmds\etexcmds.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\bitset\bitset.sty
@@ -92,10 +92,10 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3kernel\expl3.
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3kernel\expl3.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3kernel\expl3-code.tex
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\l3kernel\expl3-code.tex
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\nul:.tex
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\nul:.tex
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\nul:.tex
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\nul:.tex
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\nul:.tex
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\nul:.tex
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\nul:.tex
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\nul:.tex
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr10.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr10.tfm
@@ -131,18 +131,18 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifvtex.
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifvtex.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.cfg
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hsellogo.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hsellogo.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselcolor.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselcolor.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-tools\hsellogo.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-tools\hsellogo.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-tools\hselcolor.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-tools\hselcolor.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselfonts.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselfonts.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-fonts\hselfonts.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-fonts\hselfonts.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
@@ -177,8 +177,8 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\binhex\binhex.tex
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\binhex\binhex.tex
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselmath.sty
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\hselmath.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-math\hselmath.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-math\hselmath.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
@@ -208,6 +208,16 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xstring\xstring
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xstring\xstring.tex
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcaption.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcaption.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyphenat\hyphenat.sty
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyphenat\hyphenat.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\switch.def
@@ -237,17 +247,17 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblat
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-natbib.def
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-natbib.def
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\authoryear.bbx
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\authoryear.bbx
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\authoryear-icomp.cbx
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\authoryear-icomp.cbx
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric.cbx
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric.cbx
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.aux
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.aux
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.aux
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.aux
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.aux
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.aux
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\newtxsf\omlntxsfmi.fd
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\newtxsf\omlntxsfmi.fd
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\newtx\untxexa.fd
@@ -271,14 +281,14 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\refcount\refcou
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\refcount\refcount.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.pdf
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.pdf
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\translator\translator-basic-dictionary-English.dict
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\translator\translator-basic-dictionary-English.dict
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
@@ -291,10 +301,10 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\ge
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.bcf
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.bcf
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.bbl
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\newtxsf\ntxsfmi.tfm
@@ -337,20 +347,20 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1cmtt.fd
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\jknappen\ec\ectt1095.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\jknappen\ec\ectt0800.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\jknappen\ec\ectt0800.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\Technik_Logo.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\Technik_Logo.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\Technik_Logo.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\Technik_Logo.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\Technik_Logo.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\Technik_Logo.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\Technik_Logo.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\Technik_Logo.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\Technik_Logo.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\Technik_Logo.png
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fira\ts1firasans-osf.fd
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fira\ts1firasans-osf.fd
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-ts1.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Regular-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1--base.tfm
 INPUT C:\Users\tlieb\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
@@ -361,48 +371,51 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\Fir
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Regular-osf-ts1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-ts1--base.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.toc
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.toc
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.toc
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.toc
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.toc
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.toc
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Bold-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1--base.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Bold-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1--base.tfm
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.lof
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.lof
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.lof
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.lof
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.lof
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.lof
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-ts1.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Bold-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1--base.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Regular-osf-ts1.vf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-ts1--base.tfm
 INPUT img\Mixed_Reality.png
 INPUT .\img\Mixed_Reality.png
 INPUT .\img\Mixed_Reality.png
 INPUT .\img\Mixed_Reality.png
 INPUT .\img\Mixed_Reality.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Bold-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1--base.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
 INPUT img\Studio.png
 INPUT .\img\Studio.png
 INPUT .\img\Studio.png
 INPUT .\img\Studio.png
 INPUT .\img\Studio.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Bold-osf-t1.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Bold-osf-t1--base.tfm
 INPUT img\MultiEncoder.png
@@ -420,43 +433,53 @@ INPUT .\img\Gesture1.png
 INPUT .\img\Gesture1.png
 INPUT .\img\Gesture1.png
 INPUT .\img\Gesture1.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1.tfm
 INPUT img\Gesture2.png
 INPUT .\img\Gesture2.png
 INPUT .\img\Gesture2.png
 INPUT .\img\Gesture2.png
 INPUT .\img\Gesture2.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Regular-osf-t1.vf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-t1--base.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT img\c4Model.png
 INPUT .\img\c4Model.png
 INPUT .\img\c4Model.png
 INPUT .\img\c4Model.png
 INPUT .\img\c4Model.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT img\systemContext.png
 INPUT .\img\systemContext.png
 INPUT .\img\systemContext.png
 INPUT .\img\systemContext.png
 INPUT .\img\systemContext.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Italic-osf-t1.tfm
 INPUT img\container.png
 INPUT .\img\container.png
 INPUT .\img\container.png
 INPUT .\img\container.png
 INPUT .\img\container.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
 INPUT img\component.png
 INPUT .\img\component.png
 INPUT .\img\component.png
 INPUT .\img\component.png
 INPUT .\img\component.png
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Italic-osf-t1.vf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Italic-osf-t1--base.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT img\eingehend.png
 INPUT .\img\eingehend.png
 INPUT .\img\eingehend.png
@@ -467,19 +490,15 @@ INPUT .\img\ausgehend.png
 INPUT .\img\ausgehend.png
 INPUT .\img\ausgehend.png
 INPUT .\img\ausgehend.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT img\status.png
 INPUT .\img\status.png
 INPUT .\img\status.png
 INPUT .\img\status.png
 INPUT .\img\status.png
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
 INPUT img\kugel.png
 INPUT .\img\kugel.png
 INPUT .\img\kugel.png
@@ -517,8 +536,8 @@ INPUT C:\Users\tlieb\AppData\Local\MiKTeX\2.9\fonts\tfm\public\trsym\trsy10.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\cyrillic\wncyr10.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\cyrillic\wncyr10.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\cyrillic\wncyr10.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\newtxsf\ntxsfmi.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\newtxsf\zsfmi-reg.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\rtxmi.tfm
@@ -535,19 +554,47 @@ INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\Fir
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\newtxsf\ntxsfmi.vf
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\newtxsf\zsfmi-reg.tfm
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\rtxmi.tfm
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\Corporate_Design_HSEL-master\HSEL-images\welle_hdk.pdf
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.aux
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.out
-INPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.run.xml
-OUTPUT e:\Program Files\Unity\Forks\HoloOSCV2\HoloOSCv2\Assets\Documentation\Doku\Dokumentation_HoloOSCv2.run.xml
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT img\KeyBoardBug.jpg
+INPUT .\img\KeyBoardBug.jpg
+INPUT .\img\KeyBoardBug.jpg
+INPUT .\img\KeyBoardBug.jpg
+INPUT .\img\KeyBoardBug.jpg
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-sc-t1.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\fira\FiraSans-Regular-osf-sc-t1.vf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\fira\FiraSans-Regular-osf-sc-t1--base.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\public\newtxsf\ntxsfmia.vf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\newtxsf\zsfmia-reg.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\txsyc.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\txmia.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\txfonts\txsyb.tfm
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\tex\latex\local\HSEL-images\welle_hdk.pdf
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.aux
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.out
+INPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.run.xml
+OUTPUT c:\Users\tlieb\Documents\GitHub\neuste\ProjektDocumentation\Documentation\Doku\Dokumentation_HoloOSCv2.run.xml
+INPUT C:\Users\tlieb\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
+INPUT C:\Users\tlieb\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\fira\fir_2mfh3o.enc
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\fira\fir_iln36p.enc
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\fira\fir_d67aat.enc
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Bold.pfb
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Bold.pfb
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Italic.pfb
+INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Italic.pfb
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Regular.pfb
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\fira\FiraSans-Regular.pfb
 INPUT C:\Users\tlieb\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\txfonts\rtxmi.pfb
