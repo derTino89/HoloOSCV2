@@ -15,15 +15,15 @@ public class OSCInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        connectionStatusCheck = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>();
-        bool response = oscIn.Open(8001);
+        connectionStatusCheck = GameObject.FindWithTag("StatusCheck").GetComponent<ConnectionStatusCheck>(); 
+        openInput();
     }
 
-    void OnEnable()
+    public void openInput()
     {
-        // number of Sources should be variable at runtime, there should either be maps for all possible sources (64) 
-        // or maps have to be generated dynamically
-        for (int i = 0; i < 5; i++)
+        Debug.Log("Opening Input, creating Maps");
+        oscIn.Open(8001);
+        for (int i = 0; i < 63; i++)
         {
             string azimuth = "/MultiEncoder/azimuth" + i.ToString();
             string elevation = "/MultiEncoder/elevation" + i.ToString();
@@ -36,6 +36,24 @@ public class OSCInput : MonoBehaviour
         oscIn.MapFloat("/MultiEncoder/mute63", OnConnectionCheck);
         oscIn.Map("/MultiEncoder/inputSetting", sh.UpdateThroughReaper);
     }
+
+    /*void OnEnable()
+    {
+        // number of Sources should be variable at runtime, there should either be maps for all possible sources (64) 
+        // or maps have to be generated dynamically
+        for (int i = 0; i < 63; i++)
+        {
+            string azimuth = "/MultiEncoder/azimuth" + i.ToString();
+            string elevation = "/MultiEncoder/elevation" + i.ToString();
+            string gain = "/MultiEncoder/gain" + i.ToString();
+
+            oscIn.Map(azimuth, sh.UpdateThroughReaper);
+            oscIn.Map(elevation, sh.UpdateThroughReaper);
+            oscIn.Map(gain, sh.UpdateThroughReaper);
+        }
+        oscIn.MapFloat("/MultiEncoder/mute63", OnConnectionCheck);
+        oscIn.Map("/MultiEncoder/inputSetting", sh.UpdateThroughReaper);
+    }*/
 
     void OnConnectionCheck(float value)
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class UsingTimeTags : UnityEngine.MonoBehaviour
+	public class UsingTimeTags : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

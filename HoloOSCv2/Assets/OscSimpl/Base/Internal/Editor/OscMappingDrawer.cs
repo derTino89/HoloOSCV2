@@ -5,121 +5,139 @@
 	http://sixthsensor.dk
 */
 
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEditorInternal;
 
 namespace OscSimpl
 {
 	[CustomPropertyDrawer( typeof( OscMapping ) )]
 	public class OscMappingDrawer : PropertyDrawer
 	{
-		public const int removeButtonWidth = 18;
-		public const int removeButtonHeight = 15;
-		const int messageTypeDropdownWidth = 125;
-		public const int fieldHeight = 17;
+        Dictionary<string, ReorderableList> _reorderableLists = new Dictionary<string, ReorderableList>();
 
-		const int horizontalBoxPadding = 3;
+        public const int removeButtonWidth = 20;
+		public const int removeButtonHeight = 18;
+		const int messageTypeDropdownWidth = 125;
+		public const int fieldHeight = 18;
+
 		const int verticalBoxPadding = 3;
 
-		const int horizontalFieldPadding = 8;
+        const float entriesMarginTop = 5;
+        const float entriesMarginBottom = 5;
+
+        const int horizontalFieldPadding = 8;
 
 
-		public override float GetPropertyHeight( SerializedProperty property, GUIContent label )
+		public override float GetPropertyHeight( SerializedProperty mappingProp, GUIContent label )
 		{
-			SerializedProperty type = property.FindPropertyRelative( "type" );
-			SerializedProperty handler = GetHandler( property, type.enumValueIndex );
-			return EditorGUI.GetPropertyHeight( handler ) + verticalBoxPadding * 2 - 2;
-		}
+			SerializedProperty typeProp = mappingProp.FindPropertyRelative( "_type" );
+            SerializedProperty entriesProp = mappingProp.FindPropertyRelative( "_entries" );
+            
+            float elementHeight = OscMappingEntryDrawer.GetPropertyHeight();
+            return EditorGUIUtility.singleLineHeight * 2 + elementHeight * Mathf.Max( entriesProp.arraySize, 1 ) + entriesMarginTop + entriesMarginBottom + verticalBoxPadding * 2;
+        }
 		
 		
-		public override void OnGUI( Rect rect, SerializedProperty property, GUIContent label )
+		public override void OnGUI( Rect rect, SerializedProperty mappingProp, GUIContent label )
 		{
 			// Using BeginProperty / EndProperty on the parent property means that
 			// prefab override logic works on the entire property.
-			EditorGUI.BeginProperty( rect, label, property );
+			EditorGUI.BeginProperty( rect, label, mappingProp );
 			
 			// Get properties.
-			SerializedProperty type = property.FindPropertyRelative( "type" );
-			SerializedProperty address = property.FindPropertyRelative( "_address" );
-			SerializedProperty handler = GetHandler( property, type.enumValueIndex );
+			SerializedProperty typeProp = mappingProp.FindPropertyRelative( "_type" );
+			SerializedProperty addressProp = mappingProp.FindPropertyRelative( "_address" );
+            SerializedProperty entriesProp = mappingProp.FindPropertyRelative( "_entries" );
 
-			// Apply indentation.
-			rect = EditorGUI.IndentedRect( rect );
+            // Apply indentation.
+            rect = EditorGUI.IndentedRect( rect );
 
 			// Draw background.
-			EditorGUI.DrawRect( rect, OscEditorUI.boxColor );
+			//EditorGUI.DrawRect( rect, OscEditorUI.boxColor );
 
 			// Adjust rect and store.
 			rect.yMin += verticalBoxPadding;
 			rect.yMax -= verticalBoxPadding;
-			rect.xMin += horizontalBoxPadding;
-			rect.xMax -= horizontalBoxPadding;
 			Rect area = rect;
-			float handlerHeight = EditorGUI.GetPropertyHeight( handler );
+            //float handlerHeight = EditorGUI.GetPropertyHeight( handlerProp );
+            float handlerHeight = EditorGUI.GetPropertyHeight( entriesProp );
 
-			// Check area.
-			//EditorGUI.DrawRect( area, Color.red );
+            // Check area.
+            //EditorGUI.DrawRect( area, Color.red );
 
-			// Draw event handler.
-			rect.y -= 1;
+            // Display entries.
+            rect.y += 2;
 			rect.xMin -= 1;
 			rect.xMax += 2;
 			rect.height = handlerHeight;
-			EditorGUI.PropertyField( rect, handler );
+            ReorderableList entryListUI;
+            if( !_reorderableLists.TryGetValue( entriesProp.propertyPath, out entryListUI ) ) {
+                entryListUI = BuildEntryListUI( entriesProp );
+                _reorderableLists.Add( entriesProp.propertyPath, entryListUI );
+            }
+            entryListUI.DoList( rect );
 
-			// Draw a rect covering the header of the event handler.
-			rect.xMin += 1;
-			rect.xMax -= 2;
-			rect.y += 2;
-			rect.height = 21;
+            // Draw a rect covering the header of the event handler.
+            rect.xMin += 0;
+			rect.xMax -= 0;
+			rect.y -= 2;
+			rect.height = 24;
 			EditorGUI.DrawRect( rect, OscEditorUI.eventHandlerHeaderColor );
 
 			// Draw address field.
 			rect = area;
-			rect.xMin -= 10;
+			rect.xMin -= 12;
 			rect.y += verticalBoxPadding;
 			rect.height = fieldHeight;
 			rect.xMax -= messageTypeDropdownWidth + removeButtonWidth;
 			EditorGUI.BeginChangeCheck();
-			string newString = EditorGUI.TextField( rect, address.stringValue );
-			if( EditorGUI.EndChangeCheck() ){
-				address.stringValue = newString;
-			}
+			string newString = EditorGUI.TextField( rect, addressProp.stringValue );
+			if( EditorGUI.EndChangeCheck() ) addressProp.stringValue = newString;
 
 			// Draw OscMessageType dropdown.
 			rect = area;
 			rect.y += verticalBoxPadding;
 			rect.height = fieldHeight;
-			rect.xMax -= removeButtonWidth + horizontalFieldPadding;
+			rect.xMax -= removeButtonWidth + horizontalFieldPadding + 1;
 			rect.xMin = rect.xMax - messageTypeDropdownWidth;
+            rect.x -= 2;
 			EditorGUI.BeginChangeCheck();
-			int newEnumIndex = (int) (OscMessageType) EditorGUI.EnumPopup( rect, (OscMessageType) type.enumValueIndex );
+			int newEnumIndex = (int) (OscMessageType) EditorGUI.EnumPopup( rect, (OscMessageType) typeProp.enumValueIndex );
 			if( EditorGUI.EndChangeCheck() ){
-				type.enumValueIndex = newEnumIndex;
-			}
+                typeProp.enumValueIndex = newEnumIndex;
+            }
 
-			EditorGUI.EndProperty ();
+			EditorGUI.EndProperty();
 		}
 
-		
-		SerializedProperty GetHandler( SerializedProperty property, int typeIndex )
-		{
-			switch( typeIndex ){
-				case 0: return property.FindPropertyRelative( OscMessageType.OscMessage + "Handler" );
-				case 1: return property.FindPropertyRelative( OscMessageType.Float + "Handler" );
-				case 2: return property.FindPropertyRelative( OscMessageType.Double + "Handler" );
-				case 3: return property.FindPropertyRelative( OscMessageType.Int + "Handler" );
-				case 4: return property.FindPropertyRelative( OscMessageType.Long + "Handler" );
-				case 5: return property.FindPropertyRelative( OscMessageType.String + "Handler" );
-				case 6: return property.FindPropertyRelative( OscMessageType.Char + "Handler" );
-				case 7: return property.FindPropertyRelative( OscMessageType.Bool + "Handler" );
-				case 8: return property.FindPropertyRelative( OscMessageType.Color + "Handler" );
-				case 9: return property.FindPropertyRelative( OscMessageType.Blob + "Handler" );
-				case 10: return property.FindPropertyRelative( OscMessageType.TimeTag + "Handler" );
-				case 11: return property.FindPropertyRelative( OscMessageType.Midi + "Handler" );
-				case 12: return property.FindPropertyRelative( OscMessageType.ImpulseNullEmpty + "Handler" );
-			}
-			return null;
-		}
-	}
+
+        static ReorderableList BuildEntryListUI( SerializedProperty entriesProp )
+        {
+            ReorderableList list = new ReorderableList( entriesProp.serializedObject, entriesProp, true, true, true, true );
+
+            list.drawElementCallback = ( Rect rect, int index, bool isActive, bool isFocused ) => {
+                EditorGUI.PropertyField( rect, entriesProp.GetArrayElementAtIndex( index ) );
+            };
+            list.draggable = true;
+            list.elementHeight = OscMappingEntryDrawer.GetPropertyHeight();
+            list.drawNoneElementCallback = ( rect ) => { /* nothing please */ };
+            // Remove duplicates methods on add.
+            list.onAddCallback = ( ReorderableList l ) => {
+                entriesProp.arraySize++;
+                SerializedProperty newEntryProp = entriesProp.GetArrayElementAtIndex( entriesProp.arraySize - 1 );
+                SerializedProperty targetMethodNameProp = newEntryProp.FindPropertyRelative( "targetMethodName" );
+                SerializedProperty targetParamAssemblyQualifiedNameProp = newEntryProp.FindPropertyRelative( "targetParamAssemblyQualifiedName" );
+                targetMethodNameProp.stringValue = "";
+                targetParamAssemblyQualifiedNameProp.stringValue = "";
+
+            };
+            // Set the color of the selected list item
+            list.drawElementBackgroundCallback = ( rect, index, active, focused ) => {
+                if( active ) EditorGUI.DrawRect( rect, new Color32( 61, 96, 145, 255 ) );
+            };
+            return list;
+        }
+    }
 }

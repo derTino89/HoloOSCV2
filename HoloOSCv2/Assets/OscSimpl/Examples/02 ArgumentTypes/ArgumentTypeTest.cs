@@ -12,7 +12,7 @@ using System.Text;
 
 namespace OscSimpl.Examples
 {
-	public class ArgumentTypeTest : UnityEngine.MonoBehaviour
+	public class ArgumentTypeTest : MonoBehaviour
 	{
 		public OscIn oscIn;
 		public OscOut oscOut;

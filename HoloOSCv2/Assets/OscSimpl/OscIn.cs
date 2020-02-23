@@ -9,8 +9,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using System.Text;
-using System.Collections.Generic;
 using System.Net;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using OscSimpl;
 
@@ -26,7 +27,6 @@ public class OscIn : OscMonoBase
 	[SerializeField] string _multicastAddress = string.Empty;
 	[SerializeField] bool _filterDuplicates = true;
 	[SerializeField] bool _addTimeTagsToBundledMessages = false;
-	[SerializeField] bool _dirtyMappings = true;
 	[SerializeField] List<OscMapping> _mappings = new List<OscMapping>();
 
 	UdpReceiver _receiver = null;
@@ -39,7 +39,7 @@ public class OscIn : OscMonoBase
 	Dictionary<int, Dictionary<string, OscMapping>> _regularMappingLookup;
 	List<OscMapping> _specialPatternMappings;
 	bool _wasClosedOnDisable;
-
+	bool _dirtyMappings = true;
 
 
 	// For the inspector
@@ -69,11 +69,17 @@ public class OscIn : OscMonoBase
 	public string multicastAddress { get { return _multicastAddress; } }
 
 	/// <summary>
-	/// Gets the local network IP address for this device (read only).
+	/// Gets the primary local network IP address for this device (read only).
 	/// If the the loopback address "127.0.0.1" is returned ensure that your device is connected to a network. 
 	/// Using a VPN may block you from getting the local IP.
 	/// </summary>
 	public static string localIpAddress { get { return OscHelper.GetLocalIpAddress(); } }
+
+    /// <summary>
+	/// Gets the alternative local network IP addresses for this device (read only).
+	/// Your device may be connected through multiple network adapters, for example through wifi and ethernet.
+	/// </summary>
+	public static ReadOnlyCollection<string> localIpAddressAlternatives { get { return OscHelper.GetLocalIpAddressAlternatives(); } }
 
 	/// <summary>
 	/// Indicates whether the Open method has been called and the object is ready to receive.
@@ -191,10 +197,10 @@ public class OscIn : OscMonoBase
 
 		if( isOpen ) Close();
 
-		// Forget all mappings.
-		_onAnyMessage.RemoveAllListeners();
-		foreach( OscMapping mapping in _mappings ) mapping.Clear();
-	}
+        // Forget all mappings.
+        _onAnyMessage = null;
+        //foreach( OscMapping mapping in _mappings ) mapping.Clear();
+    }
 
 
 	void UnpackRecursivelyAndDispatch( OscPacket packet )
@@ -227,7 +233,7 @@ public class OscIn : OscMonoBase
 
 	void Dispatch( OscMessage message )
 	{
-		bool anyMessageActivated = _onAnyMessageListenerCount > 0;
+		bool anyMessageActivated = _onAnyMessage != null;
 		bool messageExposed = anyMessageActivated;
 
 		// Regular mappings.
@@ -251,80 +257,76 @@ public class OscIn : OscMonoBase
 		// Any message handler.
 		if( anyMessageActivated ) _onAnyMessage.Invoke( message );
 
-#if UNITY_EDITOR
-		// Editor inspector.
-		_inspectorMessageEvent.Invoke( message );
-#endif
-
 		// Recycle when possible.
 		if( !anyMessageActivated && !messageExposed ) OscPool.Recycle( message );
 	}
 
 
-	void InvokeMapping( OscMapping mapping, OscMessage message )
-	{
-		switch( mapping.type ) {
-			case OscMessageType.OscMessage:
-				mapping.OscMessageHandler.Invoke( message );
-				break;
-			case OscMessageType.Float:
-				float floatValue;
-				if( message.TryGet( 0, out floatValue ) ) mapping.FloatHandler.Invoke( floatValue );
-				break;
-			case OscMessageType.Double:
-				double doubleValue;
-				if( message.TryGet( 0, out doubleValue ) ) mapping.DoubleHandler.Invoke( doubleValue );
-				break;
-			case OscMessageType.Int:
-				int intValue;
-				if( message.TryGet( 0, out intValue ) ) mapping.IntHandler.Invoke( intValue );
-				break;
-			case OscMessageType.Long:
-				long longValue;
-				if( message.TryGet( 0, out longValue ) ) mapping.LongHandler.Invoke( longValue );
-				break;
-			case OscMessageType.String:
-				string stringValue = string.Empty;
-				if( message.TryGet( 0, ref stringValue ) ) mapping.StringHandler.Invoke( stringValue );
-				break;
-			case OscMessageType.Char:
-				char charValue;
-				if( message.TryGet( 0, out charValue ) ) mapping.CharHandler.Invoke( charValue );
-				break;
-			case OscMessageType.Bool:
-				bool boolValue;
-				if( message.TryGet( 0, out boolValue ) ) mapping.BoolHandler.Invoke( boolValue );
-				break;
-			case OscMessageType.Color:
-				Color32 colorValue;
-				if( message.TryGet( 0, out colorValue ) ) mapping.ColorHandler.Invoke( colorValue );
-				break;
-			case OscMessageType.Midi:
-				OscMidiMessage midiValue;
-				if( message.TryGet( 0, out midiValue ) ) mapping.MidiHandler.Invoke( midiValue );
-				break;
-			case OscMessageType.Blob:
-				byte[] blobValue = null;
-				if( message.TryGet( 0, ref blobValue ) ) mapping.BlobHandler.Invoke( blobValue );
-				break;
-			case OscMessageType.TimeTag:
-				OscTimeTag timeTagValue;
-				if( message.TryGet( 0, out timeTagValue ) ) mapping.TimeTagHandler.Invoke( timeTagValue );
-				break;
-			case OscMessageType.ImpulseNullEmpty:
-				mapping.ImpulseNullEmptyHandler.Invoke();
-				break;
-		}
-	}
+    void InvokeMapping( OscMapping mapping, OscMessage message )
+    {
+        switch( mapping.type ) {
+            case OscMessageType.OscMessage:
+                mapping.Invoke( message );
+                break;
+            case OscMessageType.Float:
+                float floatValue;
+                if( message.TryGet( 0, out floatValue ) ){
+                    mapping.Invoke( floatValue );
+                    //Debug.Log( floatValue );
+                }
+                break;
+            case OscMessageType.Double:
+                double doubleValue;
+                if( message.TryGet( 0, out doubleValue ) ) mapping.Invoke( doubleValue );
+                break;
+            case OscMessageType.Int:
+                int intValue;
+                if( message.TryGet( 0, out intValue ) ) mapping.Invoke( intValue );
+                break;
+            case OscMessageType.Long:
+                long longValue;
+                if( message.TryGet( 0, out longValue ) ) mapping.Invoke( longValue );
+                break;
+            case OscMessageType.String:
+                string stringValue = string.Empty;
+                if( message.TryGet( 0, ref stringValue ) ) mapping.Invoke( stringValue );
+                break;
+            case OscMessageType.Char:
+                char charValue;
+                if( message.TryGet( 0, out charValue ) ) mapping.Invoke( charValue );
+                break;
+            case OscMessageType.Bool:
+                bool boolValue;
+                if( message.TryGet( 0, out boolValue ) ) mapping.Invoke( boolValue );
+                break;
+            case OscMessageType.Color:
+                Color32 colorValue;
+                if( message.TryGet( 0, out colorValue ) ) mapping.Invoke( colorValue );
+                break;
+            case OscMessageType.Midi:
+                OscMidiMessage midiValue;
+                if( message.TryGet( 0, out midiValue ) ) mapping.Invoke( midiValue );
+                break;
+            case OscMessageType.Blob:
+                byte[] blobValue = null;
+                if( message.TryGet( 0, ref blobValue ) ) mapping.Invoke( blobValue );
+                break;
+            case OscMessageType.TimeTag:
+                OscTimeTag timeTagValue;
+                if( message.TryGet( 0, out timeTagValue ) ) mapping.Invoke( timeTagValue );
+                break;
+            case OscMessageType.ImpulseNullEmpty:
+                mapping.Invoke();
+                break;
+        }
+    }
 
 
-
-
-	/// <summary>
-	/// Open to receive messages on specified port and (optionally) from specified multicast IP address.
-	/// Returns success status.
-	/// </summary>
-	public bool Open( int port, string multicastAddress = "" )
+    /// <summary>
+    /// Open to receive messages on specified port and (optionally) from specified multicast IP address.
+    /// Returns success status.
+    /// </summary>
+    public bool Open( int port, string multicastAddress = "" )
 	{
 		// Ensure that we have a receiver, even when not in Play mode.
 		if( _receiver == null ) _receiver = new UdpReceiver( OnDataReceivedAsync );
@@ -418,68 +420,68 @@ public class OscIn : OscMonoBase
 	}
 
 
-	// TODO
-	// This is the syntex I would prefer, but it gives the following error:
-	// 		CS0121: The call is ambiguous between the following methods or properties:
-	//		`OscIn.Map(string, UnityEngine.Events.UnityAction<float>)' and 
-	//		`OscIn.Map(string, UnityEngine.Events.UnityAction<int>)'
-	// I am letting it stay here in the hope that the syntax will be supported in a later version of .NET.
-	/*
-	public void Map( string address, UnityAction<float> method ) { Map( address, method, OscMessageType.Float ); }
-	public void Map( string address, UnityAction<int> method ) { Map( address, method, OscMessageType.Double ); }
+    // NOTE
+    // This is the syntex I would prefer, but it gives the following error:
+    //  CS0121: The call is ambiguous between the following methods or properties: `OscIn.Map(string,Action<float>)' and `OscIn.Map(string,Action<int>)'
+    // There is no elegant solution to this, because both Action<float> and Action<int> are passed as method groups as cast inpliccitely.
+    // https://stackoverflow.com/questions/24011887/ambiguous-method-call-with-actiont-parameter-overload
+    /*
+    public void Map( string address, Action<float> method ) { Map( address, method, OscMessageType.Float ); }
+	public void Map( string address, Action<int> method ) { Map( address, method, OscMessageType.Double ); }
 	void TestOnFloat( float value ) { }
 	void TestMap(){
 		Map( "/", TestOnFloat ); // Error here.
 	}
-	*/
+    */
+	
 
 	/// <summary>
 	/// Request that incoming messages with 'address' are forwarded to 'method'.
 	/// </summary>
-	public void Map( string address, UnityAction<OscMessage> method ) { Map( address, method, OscMessageType.OscMessage ); }
+	public void Map( string address, Action<OscMessage> method ) { Map( address, method, OscMessageType.OscMessage ); }
 
 	/// <summary>
 	/// Request that a float type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapFloat( string address, UnityAction<float> method ) { Map( address, method, OscMessageType.Float ); }
+	public void MapFloat( string address, Action<float> method ) { Map( address, method, OscMessageType.Float ); }
 
 	/// <summary>
 	/// Request that a double type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapDouble( string address, UnityAction<double> method ) { Map( address, method, OscMessageType.Double ); }
+	public void MapDouble( string address, Action<double> method ) { Map( address, method, OscMessageType.Double ); }
 
 	/// <summary>
 	/// Request that a int type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapInt( string address, UnityAction<int> method ) { Map( address, method, OscMessageType.Int ); }
+	public void MapInt( string address, Action<int> method ) { Map( address, method, OscMessageType.Int ); }
 
 	/// <summary>
 	/// Request that a long type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapLong( string address, UnityAction<long> method ) { Map( address, method, OscMessageType.Long ); }
+	public void MapLong( string address, Action<long> method ) { Map( address, method, OscMessageType.Long ); }
 
 	/// <summary>
-	/// Request that a string type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
+	/// Request that a string type argument is extracted from incoming messages with matching 'address' and		forwarded to 'method'.
 	/// This method produces heap garbage. Use Map( string, UnityAction<OscMessage> ) instead and then use TryGet( int, ref string ) 
 	/// to read into a cached string. See how in the Optimisations example.
 	/// </summary>
 	[Obsolete( "This method produces heap garbage. Use Map( string, UnityAction<OscMessage> ) instead and then use TryGet( int, ref string ) to read into a cached string. See how in the Optimisations example." )]
-	public void MapString( string address, UnityAction<string> method ) { Map( address, method, OscMessageType.String ); }
+	public void MapString( string address, Action<string> method ) { Map( address, method, OscMessageType.String ); }
 
 	/// <summary>
 	/// Request that a char type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapChar( string address, UnityAction<char> method ) { Map( address, method, OscMessageType.Char ); }
+	public void MapChar( string address, Action<char> method ) { Map( address, method, OscMessageType.Char ); }
 
 	/// <summary>
 	/// Request that a bool type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapBool( string address, UnityAction<bool> method ) { Map( address, method, OscMessageType.Bool ); }
+	public void MapBool( string address, Action<bool> method ) { Map( address, method, OscMessageType.Bool ); }
 
 	/// <summary>
 	/// Request that a Color32 type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapColor( string address, UnityAction<Color32> method ) { Map( address, method, OscMessageType.Color ); }
+	public void MapColor( string address, Action<Color32> method ) { Map( address, method, OscMessageType.Color ); }
 
 	/// <summary>
 	/// Request that a byte blob argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
@@ -487,17 +489,17 @@ public class OscIn : OscMonoBase
 	/// to read into a cached array. See how in the Optimisations example.
 	/// </summary>
 	[Obsolete( "This method produces heap garbage. Use Map( string, UnityAction<OscMessage> ) instead and use TryGet( int, ref byte[] ) to read into a cached array. See how in the Optimisations example." )]
-	public void MapBlob( string address, UnityAction<byte[]> method ) { Map( address, method, OscMessageType.Blob ); }
+	public void MapBlob( string address, Action<byte[]> method ) { Map( address, method, OscMessageType.Blob ); }
 
 	/// <summary>
 	/// Request that a time tag argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapTimeTag( string address, UnityAction<OscTimeTag> method ) { Map( address, method, OscMessageType.TimeTag ); }
+	public void MapTimeTag( string address, Action<OscTimeTag> method ) { Map( address, method, OscMessageType.TimeTag ); }
 
 	/// <summary>
 	/// Request that a OscMidiMessage type argument is extracted from incoming messages with matching 'address' and forwarded to 'method'.
 	/// </summary>
-	public void MapMidi( string address, UnityAction<OscMidiMessage> method ) { Map( address, method, OscMessageType.Midi ); }
+	public void MapMidi( string address, Action<OscMidiMessage> method ) { Map( address, method, OscMessageType.Midi ); }
 
 
 	/// <summary>
@@ -512,15 +514,15 @@ public class OscIn : OscMonoBase
 		OscMapping mapping = null;
 		GetOrCreateMapping( address, OscMessageType.ImpulseNullEmpty, out mapping );
 
-		// Add listener.
-		mapping.ImpulseNullEmptyHandler.AddPersistentListener( method );
+        // Add listener.
+        mapping.Map( method.Target, method.Method );
 
-		// Set dirty flag.
-		_dirtyMappings = true;
+        // Set dirty flag.
+        _dirtyMappings = true;
 	}
 
 
-	void Map<T>( string address, UnityAction<T> method, OscMessageType type )
+	void Map<T>( string address, Action<T> method, OscMessageType type )
 	{
 		// Validate.
 		if( !ValidateAddressForMapping( address ) || method == null || !ValidateMethodTarget( method.Target, address ) ) return;
@@ -529,24 +531,11 @@ public class OscIn : OscMonoBase
 		OscMapping mapping = null;
 		GetOrCreateMapping( address, type, out mapping );
 
-		// Add listener.
-		switch( type ) {
-			case OscMessageType.OscMessage: mapping.OscMessageHandler.AddPersistentListener( method as UnityAction<OscMessage> ); break;
-			case OscMessageType.Bool: mapping.BoolHandler.AddPersistentListener( method as UnityAction<bool> ); break;
-			case OscMessageType.Float: mapping.FloatHandler.AddPersistentListener( method as UnityAction<float> ); break;
-			case OscMessageType.Int: mapping.IntHandler.AddPersistentListener( method as UnityAction<int> ); break;
-			case OscMessageType.Char: mapping.CharHandler.AddPersistentListener( method as UnityAction<char> ); break;
-			case OscMessageType.Color: mapping.ColorHandler.AddPersistentListener( method as UnityAction<Color32> ); break;
-			case OscMessageType.Midi: mapping.MidiHandler.AddPersistentListener( method as UnityAction<OscMidiMessage> ); break;
-			case OscMessageType.Double: mapping.DoubleHandler.AddPersistentListener( method as UnityAction<double> ); break;
-			case OscMessageType.Long: mapping.LongHandler.AddPersistentListener( method as UnityAction<long> ); break;
-			case OscMessageType.TimeTag: mapping.TimeTagHandler.AddPersistentListener( method as UnityAction<OscTimeTag> ); break;
-			case OscMessageType.String: mapping.StringHandler.AddPersistentListener( method as UnityAction<string> ); break;
-			case OscMessageType.Blob: mapping.BlobHandler.AddPersistentListener( method as UnityAction<byte[]> ); break;
-		}
+        // Add listener.
+        mapping.Map( method.Target, method.Method );
 
-		// Set dirty flag.
-		_dirtyMappings = true;
+        // Set dirty flag.
+        _dirtyMappings = true;
 	}
 
 
@@ -592,14 +581,6 @@ public class OscIn : OscMonoBase
 			return false;
 		}
 
-		if( !( target is UnityEngine.Object ) ) {
-			StringBuilder sb = OscDebug.BuildText( this );
-			sb.Append( "Ignored attempt to create mapping. Method must be a member of an object that inrehits from ScriptableObject or MonoBehaviour.\n" );
-			sb.Append( address );
-			Debug.LogWarning( sb );
-			return false;
-		}
-
 		return true;
 	}
 
@@ -608,14 +589,16 @@ public class OscIn : OscMonoBase
 	{
 		mapping = _mappings.Find( m => m.address == address );
 		if( mapping == null ){
-			mapping = new OscMapping( address, type );
+            mapping = new OscMapping( address, type );
+            //mapping = ScriptableObject.CreateInstance<OscMapping>();
+            //mapping.Init( address, type );
 			_mappings.Add( mapping );
 		} else if( mapping.type != type ){
 			StringBuilder sb = OscDebug.BuildText( this );
-			sb.Append( "Failed to map address'" ); sb.Append( address );
-			sb.Append( "' to method with argument type '" ); sb.Append( type );
-			sb.Append( "'. Address is already set to receive type '" ); sb.Append( mapping.type );
-			sb.Append( "', either in the editor, or by a script.\nOnly one type per address is allowed.\n" );
+			sb.Append( "Failed to map address \"" ); sb.Append( address );
+			sb.Append( "\" to method with argument type " ); sb.Append( type );
+			sb.Append( ". \nAddress is already mapped to a method with argument type " ); sb.Append( mapping.type );
+			sb.Append( ", either in the editor, or by a script. Only one type per address is allowed.\n" );
 			Debug.LogWarning( sb.ToString() );
 			return false;
 		}
@@ -626,73 +609,73 @@ public class OscIn : OscMonoBase
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void Unmap( UnityAction<OscMessage> method )	{ Unmap( method, OscMessageType.OscMessage ); }
+	public void Unmap( Action<OscMessage> method )	{ Unmap( method, OscMessageType.OscMessage ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapFloat( UnityAction<float> method ){ Unmap( method, OscMessageType.Float ); }
+	public void UnmapFloat( Action<float> method ){ Unmap( method, OscMessageType.Float ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapInt( UnityAction<int> method ){ Unmap( method, OscMessageType.Int ); }
+	public void UnmapInt( Action<int> method ){ Unmap( method, OscMessageType.Int ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapString( UnityAction<string> method ){ Unmap( method, OscMessageType.String ); }
+	public void UnmapString( Action<string> method ){ Unmap( method, OscMessageType.String ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapBool( UnityAction<bool> method ){ Unmap( method, OscMessageType.Bool ); }
+	public void UnmapBool( Action<bool> method ){ Unmap( method, OscMessageType.Bool ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapColor( UnityAction<Color32> method ){ Unmap( method, OscMessageType.Color ); }
+	public void UnmapColor( Action<Color32> method ){ Unmap( method, OscMessageType.Color ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapChar( UnityAction<char> method ){ Unmap( method, OscMessageType.Char ); }
+	public void UnmapChar( Action<char> method ){ Unmap( method, OscMessageType.Char ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapDouble( UnityAction<double> method ){ Unmap( method, OscMessageType.Double ); }
+	public void UnmapDouble( Action<double> method ){ Unmap( method, OscMessageType.Double ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapLong( UnityAction<long> method ){ Unmap( method, OscMessageType.Long ); }
+	public void UnmapLong( Action<long> method ){ Unmap( method, OscMessageType.Long ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapTimeTag( UnityAction<OscTimeTag> method ){ Unmap( method, OscMessageType.TimeTag ); }
+	public void UnmapTimeTag( Action<OscTimeTag> method ){ Unmap( method, OscMessageType.TimeTag ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapMidi( UnityAction<OscMidiMessage> method ) { Unmap( method, OscMessageType.Midi ); }
+	public void UnmapMidi( Action<OscMidiMessage> method ) { Unmap( method, OscMessageType.Midi ); }
 
 
 	/// <summary>
 	/// Request that 'method' is no longer invoked by OscIn.
 	/// </summary>
-	public void UnmapBlob( UnityAction<byte[]> method ){ Unmap( method, OscMessageType.Blob ); }
+	public void UnmapBlob( Action<byte[]> method ){ Unmap( method, OscMessageType.Blob ); }
 
 
 	/// <summary>
@@ -706,7 +689,8 @@ public class OscIn : OscMonoBase
 			OscMapping mapping = _mappings[m];
 
 			// If there are no methods mapped to the hanlder left, then remove mapping.
-			if( mapping.ImpulseNullEmptyHandler.GetPersistentEventCount() == 0 ) _mappings.RemoveAt( m );
+            mapping.Unmap( method.Target, method.Method );
+			//if( mapping.ImpulseNullEmptyHandler.GetPersistentEventCount() == 0 ) _mappings.RemoveAt( m );
 
 		}
 		_dirtyMappings = true;
@@ -719,7 +703,7 @@ public class OscIn : OscMonoBase
 	{
 		OscMapping mapping = _mappings.Find( m => m.address == address );
 		if( mapping != null ){
-			mapping.Clear();
+			//mapping.Clear();
 			_mappings.Remove( mapping );
 		}
 	}
@@ -729,72 +713,31 @@ public class OscIn : OscMonoBase
 	/// Subscribe to all outgoing messages.
 	/// The state of 'filterDuplicates' does apply.
 	/// </summary>
-	public void MapAnyMessage( UnityAction<OscMessage> message )
+	public void MapAnyMessage( Action<OscMessage> method )
 	{
-		_onAnyMessage.AddPersistentListener( message );
-		_onAnyMessageListenerCount++;
+		_onAnyMessage += method;
 	}
 
 
 	/// <summary>
 	/// Unsubscribe to all outgoing messages.
 	/// </summary>
-	public void UnmapAnyMessage( UnityAction<OscMessage> message )
+	public void UnmapAnyMessage( Action<OscMessage> method )
 	{
-		_onAnyMessage.RemovePersistentListener( message );
-		_onAnyMessageListenerCount--;
+		_onAnyMessage -= method;
 	}
 
 
-	void Unmap<T>( UnityAction<T> method, OscMessageType type )
+	void Unmap<T>( Action<T> method, OscMessageType type )
 	{
 		for( int m=_mappings.Count-1; m>=0; m-- )
 		{
 			OscMapping mapping = _mappings[m];
 
-			int eventCount = 0;
-			switch( type )
-			{
-				case OscMessageType.OscMessage:
-					mapping.OscMessageHandler.RemovePersistentListener( method as UnityAction<OscMessage> );
-					eventCount = mapping.OscMessageHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Bool:
-					mapping.BoolHandler.RemovePersistentListener( method as UnityAction<bool> );
-					eventCount = mapping.BoolHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Float:
-					mapping.FloatHandler.RemovePersistentListener( method as UnityAction<float> );
-					eventCount = mapping.FloatHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Int:
-					mapping.IntHandler.RemovePersistentListener( method as UnityAction<int> );
-					eventCount = mapping.IntHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Char:
-					mapping.CharHandler.RemovePersistentListener( method as UnityAction<char> );
-					eventCount = mapping.CharHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Color:
-					mapping.ColorHandler.RemovePersistentListener( method as UnityAction<Color32> );
-					eventCount = mapping.ColorHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Midi:
-					mapping.MidiHandler.RemovePersistentListener( method as UnityAction<OscMidiMessage> );
-					eventCount = mapping.MidiHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Double:
-					mapping.DoubleHandler.RemovePersistentListener( method as UnityAction<double> );
-					eventCount = mapping.DoubleHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Long:
-					mapping.LongHandler.RemovePersistentListener( method as UnityAction<long> );
-					eventCount = mapping.LongHandler.GetPersistentEventCount(); break;
-				case OscMessageType.TimeTag:
-					mapping.TimeTagHandler.RemovePersistentListener( method as UnityAction<OscTimeTag> );
-					eventCount = mapping.TimeTagHandler.GetPersistentEventCount(); break;
-				case OscMessageType.String:
-					mapping.StringHandler.RemovePersistentListener( method as UnityAction<string> );
-					eventCount = mapping.StringHandler.GetPersistentEventCount(); break;
-				case OscMessageType.Blob:
-					mapping.BlobHandler.RemovePersistentListener( method as UnityAction<byte[]> );
-					eventCount = mapping.BlobHandler.GetPersistentEventCount(); break;
-			}
+            mapping.Unmap( method.Target, method.Method );
 
-			// If there are no methods mapped to the hanlder left, then remove mapping.
-			if( eventCount == 0 ) _mappings.RemoveAt( m );
+            // If there are no methods mapped to the hanlder left, then remove mapping.
+            if( mapping.entryCount == 0 ) _mappings.RemoveAt( m );
 		}
 		_dirtyMappings = true;
 	}
@@ -809,8 +752,10 @@ public class OscIn : OscMonoBase
 		else _specialPatternMappings.Clear();
 
 		// Add mappings.
-		foreach( OscMapping mapping in _mappings ){
-			if( mapping.hasSpecialPattern ){
+		foreach( OscMapping mapping in _mappings )
+        {
+            mapping.SetDirty();
+            if( mapping.hasSpecialPattern ){
 				_specialPatternMappings.Add( mapping );
 			} else {
 				int hash = OscStringHash.Pack( mapping.address );
@@ -821,12 +766,11 @@ public class OscIn : OscMonoBase
 				}
 				mappingLookup.Add( mapping.address, mapping );
 			}
-		}
+        }
 
 		// Update flag.
 		_dirtyMappings = false;
 	}
-
 
 
 	class TempBuffer
@@ -841,14 +785,7 @@ public class OscIn : OscMonoBase
 			this.count = count;
 		}
 	}
-
-
-	[Obsolete( "Use MapAnyMessage() and UnmapAnyMessage()" )]
-	public OscMessageEvent onAnyMessage
-	{
-		get { return _onAnyMessage; }
-		set { _onAnyMessage = value; }
-	}
+    
 
 	[Obsolete( "Use localIpAddress instead." )]
 	public static string ipAddress { get { return localIpAddress; } }

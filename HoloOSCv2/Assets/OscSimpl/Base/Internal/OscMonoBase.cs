@@ -5,23 +5,18 @@
 	http://sixthsensor.dk
 */
 
+using System;
 using UnityEngine;
 
 namespace OscSimpl
 {
-	public class OscMonoBase : UnityEngine.MonoBehaviour
+	public class OscMonoBase : MonoBehaviour
 	{
 		[SerializeField] protected bool _openOnAwake = false;
 		[SerializeField] protected int _udpBufferSize = OscConst.udpBufferSizeDefault;
 
-		protected OscMessageEvent _onAnyMessage = new OscMessageEvent();
-		protected int _onAnyMessageListenerCount = 0;
+		protected Action<OscMessage> _onAnyMessage;
 		protected int _messageCount = 0;
-
-#if UNITY_EDITOR
-		// Accessed by inspector through reflection.
-		[SerializeField] protected OscMessageEvent _inspectorMessageEvent = new OscMessageEvent();
-#endif
 	}
 }
 

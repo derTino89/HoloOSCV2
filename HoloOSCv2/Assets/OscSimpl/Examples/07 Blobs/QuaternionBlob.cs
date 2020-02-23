@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class QuaternionBlob : UnityEngine.MonoBehaviour
+	public class QuaternionBlob : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

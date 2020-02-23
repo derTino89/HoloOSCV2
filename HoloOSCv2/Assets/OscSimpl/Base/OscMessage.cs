@@ -972,7 +972,9 @@ public class OscMessage : OscPacket
 
 		// Argument tags.
 		int argCount = _argInfo.Count;
-		for( int i = 0; i < argCount; i++ ) data[index++] = _argInfo[i].tagByte;
+		for( int i = 0; i < argCount; i++ ){
+			data[index++] = _argInfo[i].tagByte;
+		}
 
 		// Followed by at least one trailing zero, multiple of four bytes.
 		int trailingNullCount = 4 - (index % 4);
@@ -988,6 +990,8 @@ public class OscMessage : OscPacket
 		_cachedSize = size;
 		_dirtySize = false;
 
+		//Debug.Log( $"Sending { string.Join( ",", data ) }" );
+
 		return true;
 	}
 
@@ -997,10 +1001,15 @@ public class OscMessage : OscPacket
 	{
 		int beginIndex = index;
 
+		//Debug.Log( $"Receiving { string.Join( ",", data ) }" );
+
+
 		// If we are not provided with a message, then read the lossy hash and try reuse from the pool.
 		if( message == null ){
 			int hash = OscStringHash.Pack( data, index );
+			//Debug.Log( hash );
 			message = OscPool.GetMessage( hash );
+			//Debug.Log( "Getting from pool " + message.GetHashCode() );
 		} else {
 			if( message._argInfo.Count > 0 ) message.Clear(); // Ensure that arguments are cleared.
 		}
@@ -1224,7 +1233,7 @@ public class OscMessage : OscPacket
 		// Adapt info list.
 		if( shouldAddArg ){
 			int requiredArgCount = index+1;
-			if( requiredArgCount < _argInfo.Capacity ) _argInfo.Capacity = requiredArgCount;
+			if( requiredArgCount > _argInfo.Capacity ) _argInfo.Capacity = requiredArgCount;
 			for( int i = _argInfo.Count; i < requiredArgCount; i++ ) _argInfo.Add( OscArgInfo.nullInfo );
 		}
 
@@ -1266,7 +1275,7 @@ public class OscMessage : OscPacket
 	{
 		// Arg bounds.
 		if( index < 0 || index >= _argInfo.Count ){
-			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ) );
+			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ), requestedType );
 			sb.Append( "Requested argument index " ); sb.Append( index );
 			sb.Append( " is out of bounds. Message has " ); sb.Append( _argInfo.Count );
 			sb.Append( " arguments.\n" );
@@ -1278,7 +1287,7 @@ public class OscMessage : OscPacket
 		OscArgInfo info = _argInfo[index];
 		OscArgType type = OscConverter.ToArgType( info.tagByte );
 		if( requestedType != type ){
-			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ) );
+			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ), requestedType );
 			sb.Append( "Argument at index " ); sb.Append( index );
 			sb.Append( " is not type " ); sb.Append( requestedType );
 			sb.Append( " ('" ); sb.Append( (char) OscConverter.ToTagByte( requestedType ) ); sb.Append( "')");
@@ -1291,7 +1300,7 @@ public class OscMessage : OscPacket
 
 		// Data capacity.
 		if( index + info.size > _argData.Count ){
-			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ) );
+			StringBuilder sb = StartBuildingInvalidTryGetString( OscDebug.BuildText( this ), requestedType );
 			sb.Append( "Argument at index " ); sb.Append( index );
 			sb.Append( " has incomplete data\n" );
 			Debug.LogWarning( sb.ToString() );
@@ -1302,15 +1311,18 @@ public class OscMessage : OscPacket
 	}
 
 
-	StringBuilder StartBuildingInvalidTryGetString( StringBuilder sb )
+	StringBuilder StartBuildingInvalidTryGetString( StringBuilder sb, OscArgType requestedType )
 	{
-		sb.Append( "TryGet failed for message with address \"" ); sb.Append( _address ); sb.Append( "\".\n" );
+		sb.Append( "TryGet failed to read " );
+        sb.Append( requestedType );
+        sb.Append( " from message with address \"" );
+        sb.Append( _address ); 
+        sb.Append( "\".\n" );
 		return sb;
 	}
 
 
-
-	[Obsolete( "Use new OscMessage(address) instead and call AddArg or SetArg subsequently to set arguments." )]
+	[Obsolete( "Use new OscMessage(address) instead and call Add or Set subsequently to set arguments." )]
 	public OscMessage( string address, params object[] args ) : this( address )
 	{
 		Add( args  );

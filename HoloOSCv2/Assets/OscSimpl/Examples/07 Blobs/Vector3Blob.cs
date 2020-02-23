@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class Vector3Blob : UnityEngine.MonoBehaviour
+	public class Vector3Blob : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

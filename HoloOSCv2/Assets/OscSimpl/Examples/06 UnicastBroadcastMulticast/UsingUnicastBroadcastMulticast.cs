@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class UsingUnicastBroadcastMulticast : UnityEngine.MonoBehaviour
+	public class UsingUnicastBroadcastMulticast : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

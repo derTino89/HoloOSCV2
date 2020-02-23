@@ -13,7 +13,7 @@ using System.Collections.Generic;
 namespace OscSimpl
 {
 	[RequireComponent(typeof(RectTransform))]
-	public class OscOutRuntimeUI : UnityEngine.MonoBehaviour
+	public class OscOutRuntimeUI : MonoBehaviour
 	{
 		public OscOut oscOut;
 		public Toggle openToggle;

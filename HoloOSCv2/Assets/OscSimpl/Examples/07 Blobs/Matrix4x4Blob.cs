@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OscSimpl.Examples
 {
-	public class Matrix4x4Blob : UnityEngine.MonoBehaviour
+	public class Matrix4x4Blob : MonoBehaviour
 	{
 		OscOut _oscOut;
 		OscIn _oscIn;

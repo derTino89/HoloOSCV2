@@ -27,8 +27,6 @@ public class OscOut : OscMonoBase
 	[SerializeField,FormerlySerializedAs( "_ipAddress" )] string _remoteIpAddress = IPAddress.Loopback.ToString(); // 127.0.0.1;
 	[SerializeField] OscRemoteStatus _remoteStatus = OscRemoteStatus.Unknown;
 	[SerializeField] bool _multicastLoopback = true; // UdpClient default is true
-	[SerializeField] bool _bundleMessagesOnEndOfFrame = false;
-	[SerializeField] bool _splitBundlesAvoidingBufferOverflow = true;
 
 	UdpClient _udpClient;
 	IPEndPoint _endPoint;
@@ -46,8 +44,10 @@ public class OscOut : OscMonoBase
 
 	Queue<OscMessage> _tempMessageQueue = new Queue<OscMessage>();
 
+	DateTime _dateTime;
+
 	// For the inspector.
-	#if UNITY_EDITOR
+#if UNITY_EDITOR
 	[SerializeField] bool _settingsFoldout;
 	[SerializeField] bool _messagesFoldout;
 	#endif
@@ -97,33 +97,6 @@ public class OscOut : OscMonoBase
 			// Re-open.
 			if( isOpen && _mode == OscSendMode.Multicast ) Open( _port, _remoteIpAddress );
 		}
-	}
-
-	/// <summary>
-	/// When enabled, all messages will be queued and send at end of the frame (i.e. Unity's WaitForEndOfFrame),
-	/// packed into OscBundles that stay below a safe byte size (see OscHelper.bufferSizeSafetyLimit for the 
-	/// actual limit). This option is recommended for better performance. Default is false (because not all
-	/// OSC libaries supports bundles well).
-	/// </summary>
-	public bool bundleMessagesOnEndOfFrame {
-		get { return _bundleMessagesOnEndOfFrame; }
-		set {
-			_bundleMessagesOnEndOfFrame = value;
-			if( !value ){
-				_endOfFrameBuffer.Clear();
-			}
-		}
-	}
-
-
-	/// <summary>
-	/// When enabled, bundles will be split into multiple bundle if they exceed the UDP buffer size. Default is true.
-	/// If you diable this, then make sure that udpBufferSize is large enough for your packets.
-	/// </summary>
-	public bool splitBundlesAvoidingBufferOverflow
-	{
-		get { return _splitBundlesAvoidingBufferOverflow; }
-		set { _splitBundlesAvoidingBufferOverflow = value;  }
 	}
 
 
@@ -178,13 +151,13 @@ public class OscOut : OscMonoBase
 		// at this poing.
 		_messageCount = 0;
 
+		// Since DateTime.Now is slow, we just create it once and update it with unity time.
+		if( _dateTime.Ticks == 0 ) _dateTime = DateTime.Now;
+		else _dateTime = _dateTime.AddSeconds( Time.deltaTime );
+
 		// Coroutines only work at runtime.
 		if( Application.isPlaying ){
-			if( _bundleMessagesOnEndOfFrame ){
-				if( _endOfFrameCoroutine == null ) _endOfFrameCoroutine = StartCoroutine( SendBundleOnEndOfFrame() );
-			} else {
-				if( _endOfFrameCoroutine != null ) StopCoroutine( _endOfFrameCoroutine );
-			}
+			if( _endOfFrameCoroutine == null ) _endOfFrameCoroutine = StartCoroutine( SendBundleOnEndOfFrame() );
 		}
 	}
 
@@ -341,16 +314,16 @@ public class OscOut : OscMonoBase
 		if( !isOpen ) return false;
 
 		// On any message.
-		InvokeAnyMessageEventRecursively( packet );
+		if( _onAnyMessage != null ) InvokeAnyMessageEventRecursively( packet );
 
-		// Bundle at end of frame case.
-		if( _bundleMessagesOnEndOfFrame && packet is OscMessage ){
+		// Individual messages are always send in bundles at end of frame.
+		if( packet is OscMessage ){
 			_endOfFrameBuffer.Add( packet as OscMessage );
 			return true; // Assume success.
 		}
 
 		// Split bundle case.
-		if( _splitBundlesAvoidingBufferOverflow && packet is OscBundle && packet.Size() > _udpBufferSize ){
+		if( packet.Size() > _udpBufferSize ){
 			ExtractMessages( packet, _tempMessageQueue );
 			int bundleByteCount = OscConst.bundleHeaderSize;
 			OscBundle splitBundle = OscPool.GetBundle();
@@ -384,6 +357,8 @@ public class OscOut : OscMonoBase
 		// Try to pack the message.
 		int index = 0;
 		if( !packet.TryWriteTo( _cache, ref index ) ) return false;
+
+		//Debug.Log( $"Sending byte count {index}" );
 
 		// Send data!
 		return TrySendCache( index );
@@ -477,10 +452,9 @@ public class OscOut : OscMonoBase
 	/// <summary>
 	/// Subscribe to all outgoing messages.
 	/// </summary>
-	public void MapAnyMessage( UnityAction<OscMessage> method )
+	public void MapAnyMessage( Action<OscMessage> method )
 	{
-		_onAnyMessage.AddPersistentListener( method );
-		_onAnyMessageListenerCount++;
+		_onAnyMessage += method;
 		//Debug.Log( "MapAnyMessage " + method + " " + _onAnyMessage.GetPersistentEventCount() );
 	}
 
@@ -488,10 +462,9 @@ public class OscOut : OscMonoBase
 	/// <summary>
 	/// Unsubscribe to all outgoing messages.
 	/// </summary>
-	public void UnmapAnyMessage( UnityAction<OscMessage> method )
+	public void UnmapAnyMessage( Action<OscMessage> method )
 	{
-		_onAnyMessage.RemovePersistentListener( method );
-		_onAnyMessageListenerCount--;
+		_onAnyMessage -= method;
 		//Debug.Log( "UnmapAnyMessage " + method + " " + _onAnyMessage.GetPersistentEventCount() );
 	}
 
@@ -500,7 +473,7 @@ public class OscOut : OscMonoBase
 	{
 		if( isOpen ) Send( message );
 
-		if( _onAnyMessageListenerCount == 0 ) OscPool.Recycle( message );
+		if( _onAnyMessage == null ) OscPool.Recycle( message );
 	}
 
 
@@ -524,9 +497,6 @@ public class OscOut : OscMonoBase
 			OscMessage message = packet as OscMessage;
 			_onAnyMessage.Invoke( message );
 
-#if UNITY_EDITOR
-			_inspectorMessageEvent.Invoke( message );
-#endif
 			_messageCount++;
 		}
 	}
@@ -554,6 +524,8 @@ public class OscOut : OscMonoBase
 			} else if( ex.ErrorCode == 10061 ) { // "Connection refused"
 												 // Ignore.
 
+			} else if( ex.ErrorCode == 10064 ) { // "Host is down"
+												 // Ignore. We get this when the remote target is not found.
 			} else if( ex.ErrorCode == 10040 ) { // "Message too long"
 				StringBuilder sb = OscDebug.BuildText( this );
 				sb.Append( "Failed to send message. Packet size at " ); sb.Append( byteCount );
@@ -584,13 +556,13 @@ public class OscOut : OscMonoBase
 
 	IEnumerator SendBundleOnEndOfFrame()
 	{
-		while( _bundleMessagesOnEndOfFrame )
+		while( true )
 		{
 			// Wait.
 			yield return _endOfFrameYield;
 
 			// Prepare for composing bundle.
-			_endOfFrameTimeTag.time = DateTime.Now;
+			_endOfFrameTimeTag.time = _dateTime;
 			int cacheIndex = 0;
 			OscBundle.TryWriteHeader( _endOfFrameTimeTag, _cache, ref cacheIndex );
 
@@ -602,7 +574,7 @@ public class OscOut : OscMonoBase
 				int messageSize = _endOfFrameBuffer.GetSize( m ); // Bundle stores size of each message in a 4 byte integer.
 
 				// Check limit.
-				if( _splitBundlesAvoidingBufferOverflow && cacheIndex + FourByteOscData.byteCount + messageSize >= _udpBufferSize ) {
+				if( cacheIndex + FourByteOscData.byteCount + messageSize >= _udpBufferSize ) {
 					// We have reached the safelty limit, now send the bundle.
 					TrySendCache( cacheIndex );
 
@@ -621,8 +593,6 @@ public class OscOut : OscMonoBase
 			if( cacheIndex > OscConst.bundleHeaderSize ) TrySendCache( cacheIndex );
 			_endOfFrameBuffer.Clear();
 		}
-
-		_endOfFrameCoroutine = null;
 	}
 
 
@@ -637,14 +607,6 @@ public class OscOut : OscMonoBase
 	}
 
 
-	[Obsolete( "Use MapAnyMessage() and UnmapAnyMessage()" )]
-	public OscMessageEvent onAnyMessage
-	{
-		get { return _onAnyMessage; }
-		set { _onAnyMessage = value; }
-	}
-
-
 	[Obsolete( "Use Send( message ) instead." )]
 	public void Send( string address, params object[] args )
 	{
@@ -655,4 +617,17 @@ public class OscOut : OscMonoBase
 
 	[Obsolete( "Use remoteIpAddress instead." )]
 	public string ipAddress { get { return _remoteIpAddress; } }
+
+
+	[Obsolete( "This is always true now. Individual messages are always bundled and send on end of frame. If you want to send messages immediately, then add your messages to a bundle and send that instead." )]
+	public bool bundleMessagesOnEndOfFrame {
+		get { return true; }
+		set {}
+	}
+
+	[Obsolete( "This is always true now." )]
+	public bool splitBundlesAvoidingBufferOverflow {
+		get { return true; }
+		set {}
+	}
 }

@@ -50,7 +50,6 @@ public class SourceObject : MonoBehaviour
     public void sendMessageToOSCHandler() {
         //TODO: Refactoring -> OSC-Handler should handle adresses, SourceObject should only tell OSCHandler its values
         string[] data = new string[2];
-
         data[0] = AZIMUTH_ADDRESS + GetID().ToString();
         data[1] = GetAzimuth().ToString();
         output.SendMessage("SendOSCMessageToClient", data);
